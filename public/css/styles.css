@@ -1,7 +1,7 @@
 :root {
   --morado: #8c53bb;
-  --rosa: #dfdbe5;
-  --morado_oscuro: #593679;
+  --rosa: #e9cdfa;
+  --morado_oscuro: #5d3e7a;
 }
 
 html, body {
@@ -12,7 +12,7 @@ html, body {
 
 
 body{
-    background-color: var(--rosa);
+    background-color: #f8f9fa;;
 }
 
 
@@ -28,6 +28,7 @@ background-color: var(--rosa);
 background-image: url("https://www.transparenttextures.com/patterns/60-lines.png");
 /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 font-family: "Inter", sans-serif;
+text-decoration: underline;
 }
 
 .logo{
@@ -62,8 +63,56 @@ footer a {
 
 .seccion-categoria{
     background-color: var(--rosa);
+    font-family: "DM Serif Display", serif;
 }
+
+.seccion-categoria p{
+  font-family: "Inter", sans-serif !important;
+  color: var(--morado_oscuro);
+}
+
+.seccion-categoria i{
+  color: var(--morado_oscuro);
+}
+
+.seccion-categoria h2{
+  font-family: "Inter", sans-serif;
+  color: var(--morado_oscuro);
+}
+
+.seccion-destacados{
+  background-color: beige;
+}
+
 
 .titulo{
     font-family: "DM Serif Display", serif;
 }
+
+.titulo-inicio{
+      font-family: "DM Serif Display", serif;
+      color: var(--morado_oscuro);
+}
+
+
+.banner{
+    width: 94%;
+    max-width: 1800px;
+    margin: auto;
+    display: block;
+    margin: 25px auto 50px;
+}
+
+.contenedor-reducido {
+        max-width: 1200px; 
+        margin: 0 auto;
+    }
+
+/* Personalización de las tarjetas */
+    .tarjeta-custom {
+        border-radius: 25px !important; /* Aquí le das el nivel de redondeo que quieras */
+        max-width: 390px !important;    /* Controla qué tan pequeñas quieres las tarjetas */
+        margin: 0 auto !important;      /* Centra la tarjeta dentro de su propia columna */
+        border: none;        /* Opcional: quita el borde por defecto de Bootstrap */
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Opcional: sombra suave para que resalten */
+    }

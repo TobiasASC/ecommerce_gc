@@ -10,20 +10,10 @@
                 <ul class="list-unstyled">
                     <li><a href="/">Inicio</a></li>
                     <li><a href="/catalogo">Catalogo</a></li>
-                    <li><a href="/nosotros">Nosotros</a></li>
                     <li><a href="/contacto">Contacto</a></li>
                 </ul>
             </div>
 
-            <!--info importante-->
-            <div class="col-md-3">
-                <h5>IMPORTANTE</h5>
-                <ul class="list-unstyled">
-                <li><a href="/terminos">Términos y condiciones</a></li>
-                <li><a href="/privacidad">Política de privacidad</a></li>
-                <li><a href="/comercializacion">Comercialización</a></li>
-                </ul>
-            </div>
 
             <!--datos de contacto-->
             <div class="col-md-3">
