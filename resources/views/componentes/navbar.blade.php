@@ -8,8 +8,8 @@
             <div class="navbar-nav">
                 <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" aria-current="page" href="/">INICIO</a>
                 <a class="nav-link {{ request()->is('catalogo') || request()->is('categorias/*')? 'active' : '' }}" href="/catalogo">CATALOGO</a>
-                <a class="nav-link {{ request()->is('contacto') ? 'active' : '' }}" href="/contacto">DESTACADOS</a>
-                <a class="nav-link {{ request()->is('contacto') ? 'active' : '' }}" href="/contacto">CONTACTO</a>
+                <a class="nav-link {{ request()->is('contacto') ? 'active' : '' }}" href="#destacados">DESTACADOS</a>
+                <a class="nav-link {{ request()->is('contacto') ? 'active' : '' }}" href="#contacto">CONTACTO</a>
             </div>
         </div>
     </div>
