@@ -2,6 +2,7 @@
   --morado: #8c53bb;
   --rosa: #e9cdfa;
   --morado_oscuro: #5d3e7a;
+  --verde_confirmar: #39c457;
 }
 
 /* BANNER PRINCIPAL*/
@@ -203,7 +204,6 @@
     transform: rotate(3deg);
   }
 
-  /* stitched thread accent connecting a couple of pics, nods to handmade fabric */
   .stitch{
     position: absolute;
     border: none;
@@ -235,19 +235,7 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+/*Body*/
 html, body {
   height: 100%;
   margin: 0;
@@ -260,6 +248,7 @@ body{
 }
 
 
+/*TOPBAR*/
 .diseño-topbar{
 background-color: #8c53bb;
 background-image: url("https://www.transparenttextures.com/patterns/dark-wood.png");
@@ -267,6 +256,13 @@ background-image: url("https://www.transparenttextures.com/patterns/dark-wood.pn
 padding: 10px 50px;
 }
 
+.logo{
+    height: 80px;
+    width: auto;
+}
+
+
+/*NAVBAR*/
 .diseño-navbar{
 background-color: var(--rosa);
 background-image: url("https://www.transparenttextures.com/patterns/60-lines.png");
@@ -275,17 +271,8 @@ font-family: "Inter", sans-serif;
 text-decoration: underline;
 }
 
-.logo{
-    height: 80px;
-    width: auto;
-}
 
-.logo-footer{
-  width: 150px;
-  display: block;
-  margin: 0 auto;
-}
-
+/*FOOTER*/
 footer{
   background-color: var(--morado_oscuro);
   color: white;
@@ -300,11 +287,19 @@ footer a {
   text-decoration: none;
 }
 
+.logo-footer{
+  width: 150px;
+  display: block;
+  margin: 0 auto;
+}
 
+
+/*ICONOS*/
 .color-icono{
     color: var(--rosa);
 }
 
+/*CATEGORIAS-INICIO*/
 .seccion-categoria{
     background-color: var(--rosa);
     font-family: "DM Serif Display", serif;
@@ -324,10 +319,13 @@ footer a {
   color: var(--morado_oscuro);
 }
 
+/*DESTACADOS-INICIO*/
 .seccion-destacados{
   background-color: beige;
 }
 
+
+/*CONTACTO-INICIO*/
 .seccion-contacto{
     background-color: var(--rosa);
     font-family: "DM Serif Display", serif;
@@ -339,6 +337,7 @@ footer a {
 }
 
 
+/*Titulo*/
 .titulo{
     font-family: "DM Serif Display", serif;
 }
@@ -348,29 +347,26 @@ footer a {
       color: var(--morado_oscuro);
 }
 
-
-
-
 .contenedor-reducido {
         max-width: 1200px; 
         margin: 0 auto;
     }
 
 /* Personalización de las tarjetas */
-    .tarjeta-custom {
-        border-radius: 25px !important; /* Aquí le das el nivel de redondeo que quieras */
-        max-width: 390px !important;    /* Controla qué tan pequeñas quieres las tarjetas */
-        margin: 0 auto !important;      /* Centra la tarjeta dentro de su propia columna */
-        border: none;        /* Opcional: quita el borde por defecto de Bootstrap */
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Opcional: sombra suave para que resalten */
+  .tarjeta-custom {
+        border-radius: 25px !important; 
+        max-width: 390px !important;    
+        margin: 0 auto !important;      
+        border: none;        
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
     }
 
 .tarjeta-contacto-custom{
-        border-radius: 25px !important; /* Aquí le das el nivel de redondeo que quieras */
-        max-width: 500px !important;    /* Controla qué tan pequeñas quieres las tarjetas */
-        margin: 0 auto !important;      /* Centra la tarjeta dentro de su propia columna */
-        border: none;        /* Opcional: quita el borde por defecto de Bootstrap */
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Opcional: sombra suave para que resalten */
+        border-radius: 25px !important; 
+        max-width: 500px !important;    
+        margin: 0 auto !important;      
+        border: none;        
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 .tarjeta-contacto-custom h2{
@@ -393,3 +389,47 @@ footer a {
   font-family: "Inter", sans-serif;
 }
 
+.tarjeta-autenticacion{
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    border: 5px solid var(--morado_oscuro);
+    background-color: beige;
+    font-family: "Inter", sans-serif;
+}
+
+.tarjeta-autenticacion h2{
+  font-family: "DM Serif Display", serif;
+
+}
+
+.btn-autenticar{
+  border-radius: 25px;
+  color: #ffff;
+  background-color: var(--verde_confirmar);
+  transition: transform 0.2s ease;
+}
+
+.btn-autenticar:hover{
+    transform: scale(1.05);
+    color: #ffff;
+    background-color: rgb(46, 160, 107);
+}
+
+.btn-invitado{
+  border-radius: 25px;
+  background-color: var(--morado_oscuro);
+  color: #ffff;
+  transition: transform 0.2s ease;
+}
+
+.btn-invitado:hover{
+      background-color: #4b3064;
+      color: #ffff;
+      transform: scale(1.05);
+      
+}
+
+.body-autenticacion{
+  background-color: var(--purple-deep);
+}
