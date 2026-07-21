@@ -5,6 +5,7 @@ use App\Http\Controllers\InicioController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ProductoController;
 
 Route::get('/', [InicioController::class, 'index']);
 
@@ -19,8 +20,12 @@ Route::get('/register', [AuthController::class, 'formularioRegistro']);
 
 Route::post('/register', [AuthController::class, 'registrar']);
 
+Route::get('/catalogo', [ProductoController::class, 'index'])->name('catalogo');
 
-/* MIDDLEWARE DEL ADMIN */
+Route::get('/categorias/{id}', [ProductoController::class, 'categoria'])->name('catalogo.categoria');
+
+
+/* ================== MIDDLEWARE DEL ADMIN ================== */
 Route::middleware(['auth', 'admin'])->group(function () {
 
 Route::get('/admin', [AdminController::class, 'admin'])->name('admin.cuenta');
@@ -28,7 +33,7 @@ Route::get('/admin', [AdminController::class, 'admin'])->name('admin.cuenta');
 });
 
 
-/* MIDDLEWARE DEL CLIENTE */
+/* ================== MIDDLEWARE DEL CLIENTE ================== */
 Route::middleware(['auth', 'cliente'])->group(function () {
 
 Route::get('/cuentaCliente', [ClienteController::class, 'index'])->name('cliente.cuenta');
