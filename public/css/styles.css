@@ -520,3 +520,28 @@ footer a {
     display: block;
 }
 
+/*Sidebar*/
+.activo{
+  background-color: var(--morado_oscuro) !important;
+  color: #ffff;
+}
+
+.activo:hover{
+  color: #ffff;
+}
+
+.btn-contraseña{
+  background-color: rgb(255, 255, 150);
+  color: #000000;
+}
+
+.btn-confirmar-cuenta{
+  background-color: var(--morado);
+  color: #ffff;
+}
+
+.btn-confirmar-cuenta:hover{
+    background-color: var(--morado_oscuro);
+    color: #ffff;
+}
+

@@ -28,7 +28,27 @@ Route::get('/categorias/{id}', [ProductoController::class, 'categoria'])->name('
 /* ================== MIDDLEWARE DEL ADMIN ================== */
 Route::middleware(['auth', 'admin'])->group(function () {
 
-Route::get('/admin', [AdminController::class, 'admin'])->name('admin.cuenta');
+Route::get('/admin', [AdminController::class, 'index'])->name('admin.cuenta');
+
+Route::get('/estadisticas', function () {
+    return view('admin.adminEstadisticas');
+})->name('admin.estadisticas');
+
+Route::get('/clientes', function () {
+    return view('admin.adminClientes');
+})->name('admin.clientes');
+
+Route::get('/pedidosAdmin', function () {
+    return view('admin.adminPedidos');
+})->name('admin.pedidos');
+
+Route::get('/productos', function () {
+    return view('admin.adminProductos');
+})->name('admin.productos');
+
+Route::get('/categorias', function () {
+    return view('admin.adminCategorias');
+})->name('admin.categorias');
 
 });
 
@@ -37,5 +57,17 @@ Route::get('/admin', [AdminController::class, 'admin'])->name('admin.cuenta');
 Route::middleware(['auth', 'cliente'])->group(function () {
 
 Route::get('/cuentaCliente', [ClienteController::class, 'index'])->name('cliente.cuenta');
+
+Route::get('/pedidos', function () {
+    return view('cliente.clientePedidos');
+})->name('cliente.pedidos');
+
+
+Route::get('/carrito', function () {
+    return view('cliente.clienteCarrito');
+})->name('cliente.carrito');
+
+
+Route::put('/cuentaCliente', [ClienteController::class, 'actualizar'])->name('cliente.actualizar');
 
 });
