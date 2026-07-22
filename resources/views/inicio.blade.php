@@ -30,7 +30,7 @@
 
 
 
-<section class="seccion-categoria pt-4" id="categorias">
+<section class="seccion-categoria pt-4 pb-5" id="categorias">
     <!-- El "container" agrupa el contenido y "contenedor-reducido" ajusta el ancho -->
     <div class="container contenedor-reducido">
         <div class="text-center mb-5">
@@ -46,7 +46,7 @@
                     <div class="card-body">
                         <i class="fa-solid fa-bag-shopping fs-1 mb-3"></i>
                         <h2 class="fw-bold fs-3">Bolsos</h2>
-                        <p class="fs-6">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione sunt.</p>
+                        <p class="fs-6">Diseños exclusivos y funcionales, pensados para acompañarte en tu día a día con comodidad y un estilo único.</p>
                     </div>
                 </div>
             </div>
@@ -56,7 +56,7 @@
                     <div class="card-body">
                         <i class="fa-regular fa-face-kiss-wink-heart fs-1 mb-3"></i>
                         <h2 class="fw-bold fs-3">Decoraciones</h2>
-                        <p class="fs-6">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+                        <p class="fs-6">Detalles únicos y llenos de calidez para darle vida a cada rincón y convertir cualquier espacio en un verdadero hogar.</p>
                     </div>
                 </div>
             </div>
@@ -66,7 +66,7 @@
                     <div class="card-body">
                         <i class="fa-solid fa-key fs-1 mb-3"></i>
                         <h2 class="fw-bold fs-3">Llaveros</h2>
-                        <p class="fs-6">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+                        <p class="fs-6">Un pequeño gran detalle para regalar o regalarte. Llevá siempre con vos un accesorio original, artesanal y con mucho estilo.</p>
                     </div>
                 </div>
             </div>
@@ -75,9 +75,9 @@
     </div>
 </section>
 
-<section class="seccion-destacados" id="destacados">
+<section class="seccion-destacados py-5" id="destacados">
     <div class="container contenedor-reducido">
-        <h1 class="text-center titulo-inicio mt-4 mb-5 fw-bold">Productos destacados</h1>
+        <h1 class="text-center titulo-inicio mb-5 fw-bold">Productos destacados</h1>
         
         <div class="row justify-content-center text-center">
             
@@ -145,7 +145,7 @@
     </div>
 </section>
 
-<section class="seccion-contacto mt-5" id="contacto">
+<section class="seccion-contacto py-5" id="contacto">
     <!-- El "container" agrupa el contenido y "contenedor-reducido" ajusta el ancho -->
     <div class="container contenedor-reducido">
         <div class="text-center mb-5">
