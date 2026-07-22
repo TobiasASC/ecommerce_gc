@@ -1,5 +1,4 @@
 @extends('plantilla')
-
 @section('contenido')
 <!-- Cambiamos 'container' por 'container-fluid' y quitamos el padding horizontal con 'px-0' -->
 <div class="container-fluid px-0">

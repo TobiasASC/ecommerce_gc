@@ -268,7 +268,6 @@ background-color: var(--rosa);
 background-image: url("https://www.transparenttextures.com/patterns/60-lines.png");
 /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 font-family: "Inter", sans-serif;
-text-decoration: underline;
 }
 
 
@@ -493,6 +492,22 @@ footer a {
   color: #000000;
   background-color: rgb(216, 216, 114);
 }
+
+.boton-volver-catalogo{
+  background-color: var(--morado);
+  color: #ffff !important;
+}
+
+.boton-volver-catalogo:hover{
+  background-color: var(--morado_oscuro);
+  color: #ffff !important;
+}
+
+.borde-personalizado {
+    border: 5px solid var(--morado_oscuro); /* Grosor, estilo (sólido) y color */
+}
+
+
 
 .categoria-producto{
   background-color: rgb(255, 255, 193);

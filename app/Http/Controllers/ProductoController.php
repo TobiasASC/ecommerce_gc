@@ -48,4 +48,16 @@ public function categoria($id)
         'categorias'
     ));
 }
+
+public function mostrarEspecifico($id)
+    {
+        $producto = Producto::with('categoria')
+        ->where('activo', true)
+        ->where('stock_actual', '>', 0)
+        ->findOrFail($id);
+
+        return view('infoProducto', compact(
+            'producto'
+        ));
+    }
 }

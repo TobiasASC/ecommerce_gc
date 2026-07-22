@@ -24,6 +24,9 @@ Route::get('/catalogo', [ProductoController::class, 'index'])->name('catalogo');
 
 Route::get('/categorias/{id}', [ProductoController::class, 'categoria'])->name('catalogo.categoria');
 
+Route::get('/producto/{id}', [ProductoController::class, 'mostrarEspecifico'])
+->name('producto.mostrar');
+
 
 /* ================== MIDDLEWARE DEL ADMIN ================== */
 Route::middleware(['auth', 'admin'])->group(function () {

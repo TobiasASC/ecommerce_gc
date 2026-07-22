@@ -73,7 +73,7 @@
                         <button class="btn boton-agregar">
                             <i class="fa-solid fa-cart-plus me-1"></i> Agregar
                         </button>
-                        <a href="#" class="btn boton-detalle">
+                        <a href="{{ route('producto.mostrar', $producto->id) }}" id="btn-vermas-{{ $producto->id }}" class="btn boton-detalle">
                             Ver detalles
                         </a>
                         {{-- <a href="{{ route('productos.show', $producto->id) }}" class="btn btn-outline-dark">Ver detalles</a> --}}
