@@ -36,7 +36,7 @@
                     <i class="fas fa-box me-2"></i> Mis Pedidos
                 </a>
                 
-                <a class="nav-link text-nowrap {{ request()->routeIs('cliente.carrito') ? 'activo' : 'text-dark' }}" href="{{ route('cliente.carrito') }}">
+                <a class="nav-link text-nowrap {{ request()->routeIs('carrito.mostrar') ? 'activo' : 'text-dark' }}" href="{{ route('carrito.mostrar') }}">
                     <i class="fas fa-shopping-cart me-2"></i> Mi Carrito
                 </a>
             @endif

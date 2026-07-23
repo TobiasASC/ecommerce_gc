@@ -336,6 +336,7 @@ footer a {
 }
 
 
+
 /*Titulo*/
 .titulo{
     font-family: "DM Serif Display", serif;
@@ -368,8 +369,16 @@ footer a {
         max-width: 390px !important;    
         margin: 0 auto !important;      
         border: none;        
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        /* Agregamos una transición suave de 0.3 segundos */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
     }
+
+.tarjeta-custom:hover {
+    transform: translateY(-8px); /* Sube la tarjeta 8 píxeles */
+    /* Usamos un tono suave de morado para la sombra si quieres que combine, o un gris más oscuro */
+    box-shadow: 0 12px 20px rgba(140, 83, 187, 0.15); 
+}
 
 .tarjeta-contacto-custom{
         border-radius: 25px !important; 
@@ -474,13 +483,13 @@ footer a {
 }
 
 .boton-agregar{
-  background-color: var(--morado);
+  background-color: var(--morado_oscuro);
   color: #ffff;
 }
 
 .boton-agregar:hover{
   color: #ffff;
-  background-color: var(--morado_oscuro);
+  background-color: var(--morado);
 }
 
 .boton-detalle{
@@ -490,16 +499,16 @@ footer a {
 
 .boton-detalle:hover{
   color: #000000;
-  background-color: rgb(216, 216, 114);
+  background-color: rgb(255, 255, 116);
 }
 
 .boton-volver-catalogo{
-  background-color: var(--morado);
+  background-color: var(--morado_oscuro);
   color: #ffff !important;
 }
 
 .boton-volver-catalogo:hover{
-  background-color: var(--morado_oscuro);
+  background-color: var(--morado);
   color: #ffff !important;
 }
 

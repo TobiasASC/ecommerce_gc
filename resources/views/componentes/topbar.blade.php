@@ -29,7 +29,7 @@
             @else
                 
                 <!-- Ícono carrito (solo cliente) -->
-                <a href="#"><i class="fa-solid fa-cart-shopping color-icono"></i></a>
+                <a href="{{ route('carrito.mostrar') }}"><i class="fa-solid fa-cart-shopping color-icono"></i></a>
 
                 <!-- Dropdown Cliente -->
                 <div class="dropdown">
