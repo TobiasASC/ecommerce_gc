@@ -7,6 +7,7 @@ use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\CarritoController;
+use App\Http\Controllers\PedidoController;
 
 Route::get('/', [InicioController::class, 'index'])->name('inicio');
 
@@ -62,11 +63,6 @@ Route::middleware(['auth', 'cliente'])->group(function () {
 
 Route::get('/cuentaCliente', [ClienteController::class, 'index'])->name('cliente.cuenta');
 
-Route::get('/pedidos', function () {
-    return view('cliente.clientePedidos');
-})->name('cliente.pedidos');
-
-
 Route::get('/carrito', [CarritoController::class, 'index'])->name('carrito.mostrar');
 
 Route::post('/carrito/agregar', [CarritoController::class, 'agregar'])->name('carrito.agregar');
@@ -76,5 +72,11 @@ Route::delete('/carrito/eliminar/{id}', [CarritoController::class, 'eliminar'])-
 Route::put('/cuentaCliente', [ClienteController::class, 'actualizar'])->name('cliente.actualizar');
 
 Route::delete('/carrito/vaciar', [CarritoController::class, 'vaciar'])->name('carrito.vaciar');
+
+
+
+
+Route::get('/pedidosCliente', [PedidoController::class, 'pedidosCliente'])->name('cliente.pedidos');
+
 
 });

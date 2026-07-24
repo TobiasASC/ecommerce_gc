@@ -24,7 +24,7 @@ class ClienteController extends Controller
         $usuario->apellido = $request->apellido;
         $usuario->email = $request->email;
 
-        if ($request->filled('password')) {
+        if ($request->filled('contraseña')) {
 
         if (!Hash::check(
             $request->contraseña_actual,
@@ -38,8 +38,8 @@ class ClienteController extends Controller
                 ->withInput();
         }
 
-        $usuario->password = Hash::make(
-            $request->contraseña
+        $usuario->contraseña = Hash::make(
+        $request->contraseña
         );
     }
     // Guardamos los cambios
