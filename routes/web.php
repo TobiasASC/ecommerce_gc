@@ -73,6 +73,14 @@ Route::put('/cuentaCliente', [ClienteController::class, 'actualizar'])->name('cl
 
 Route::delete('/carrito/vaciar', [CarritoController::class, 'vaciar'])->name('carrito.vaciar');
 
+Route::post('/carrito/procesar', [CarritoController::class, 'procesar'])->name('carrito.procesar');
+
+Route::get('/compraConfirmada', function () {
+    return view('cliente.compraConfirmada');
+})->name('compra.confirmada');
+
+// Actualiza la cantidad de unidades de los productos del carrito
+Route::put('/carrito/actualizar/{id}', [CarritoController::class, 'actualizar'])->name('carrito.actualizar');
 
 
 

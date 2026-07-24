@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Pedido;
 use App\Models\MetodoPago;
 use App\Models\Producto;
+use Illuminate\Support\Facades\Auth;
 
 class CarritoController extends Controller
 {
@@ -137,7 +138,7 @@ class CarritoController extends Controller
         // Recalcular el total general del carrito
         $this->recalcularTotal($carrito);
 
-        return back()->route('carrito.mostrar')->with('success', 'Cantidad actualizada correctamente.');
+        return back()->with('success', 'Cantidad actualizada correctamente.');
     }
 
     public function eliminar($id)
@@ -153,9 +154,79 @@ class CarritoController extends Controller
                          ->with('success', 'Producto eliminado correctamente del carrito.');
     }
 
+    public function procesar(Request $request){
+        $request->validate([
+            'metodo_pago_id' => 'required|exists:metodo_pagos,id',
+            
+            // Validaciones de tarjeta
+            'numero_tarjeta' => 'required_if:metodo_pago_id,1|nullable|string',
+            'titular_tarjeta' => 'required_if:metodo_pago_id,1|nullable|string',
+            'vencimiento'    => 'required_if:metodo_pago_id,1|nullable|string',
+            'cvv'            => 'required_if:metodo_pago_id,1|nullable|string',
+            
+        ]);
+
+        $pedido = Pedido::where('usuario_id', Auth::id())
+                        ->where('estado', 'carrito')
+                        ->first();
+
+        // Si no hay carrito o no tiene productos, lo devolvemos
+        if (!$pedido || $pedido->detalles()->count() === 0) {
+            return redirect()->route('cliente.carrito')->with('error', 'Tu carrito está vacío o la sesión expiró.');
+        }
+
+        // --- VALIDACIÓN DE STOCK ANTES DE COMPRAR ---
+        foreach ($pedido->detalles as $detalle) {
+            $producto = $detalle->producto;
+            
+            // Verificamos si la cantidad pedida es mayor al stock real
+            if ($detalle->cantidad > $producto->stock_actual) {
+                return redirect()->route('cliente.carrito')->with('error', 'Lo sentimos, no hay stock suficiente para el producto: ' . $producto->nombre . '. Stock disponible: ' . $producto->stock_actual);
+            }
+        }
+        
+        // Obtener el total sumando los detalles (por seguridad)
+        $totalPedido = $pedido->detalles()->sum('subtotal');
+
+        
+        // Actualizar el pedido
+        $estadoFinal = 'confirmado'; 
+        $metodo = MetodoPago::find($request->metodo_pago_id);
+
+        if ($metodo && in_array($metodo->descripcion, ['Transferencia Bancaria'])) {
+            $estadoFinal = 'pendiente_pago';
+        }
+
+        
+        $pedido->update([
+            'total'          => $totalPedido,
+            'estado'         => $estadoFinal, 
+            'metodo_pago_id' => $request->metodo_pago_id,
+            'fecha_venta'    => now(),
+        ]);
+
+        // DESCONTAR STOCK DE LOS PRODUCTOS
+        foreach ($pedido->detalles as $detalle) {
+            $producto = $detalle->producto;
+            if ($producto) {
+                $producto->stock_actual -= $detalle->cantidad;
+                if ($producto->stock_actual < 0) {
+                    $producto->stock_actual = 0;
+                }
+                $producto->save();
+            }
+        }
+
+        // Redirigimos a la pantalla de éxito pasando el ID del pedido
+        return redirect()->route('compra.confirmada')->with('pedido_id', $pedido->id);
+    }
+
+
+    }
 
 
 
 
 
-}
+
+

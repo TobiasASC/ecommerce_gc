@@ -12,7 +12,7 @@ class PedidoController extends Controller
     public function pedidosCliente()
     {
         $pedidos = Pedido::where('usuario_id', Auth::id())
-                    ->where('estado', 'carrito') // deberia ir 'confirmado' pero para probar va carrito 
+                    ->where('estado', 'confirmado') // deberia ir 'confirmado' pero para probar va carrito 
                     ->orderBy('created_at', 'desc')
                     ->get();
     
