@@ -39,13 +39,17 @@ Route::get('/estadisticas', function () {
     return view('admin.adminEstadisticas');
 })->name('admin.estadisticas');
 
-Route::get('/clientes', function () {
-    return view('admin.adminClientes');
-})->name('admin.clientes');
+Route::get('/clientes', [AdminController::class, 'clientes'])->name('admin.clientes');
 
-Route::get('/pedidosAdmin', function () {
-    return view('admin.adminPedidos');
-})->name('admin.pedidos');
+// Hacer administrador a un cliente
+Route::patch('/admin/clientes/{id}/hacer-admin', [AdminController::class, 'hacerAdmin'])->name('admin.clientes.hacer-admin');
+
+// Quitar administrador (volver a hacer cliente)
+Route::patch('/admin/clientes/{id}/hacer-cliente', [AdminController::class, 'hacerCliente'])->name('admin.clientes.hacer-cliente');
+
+Route::get('/admin/pedidos', [PedidoController::class, 'pedidosAdmin'])->name('admin.pedidos');
+
+
 
 Route::get('/productos', function () {
     return view('admin.adminProductos');
@@ -81,8 +85,6 @@ Route::get('/compraConfirmada', function () {
 
 // Actualiza la cantidad de unidades de los productos del carrito
 Route::put('/carrito/actualizar/{id}', [CarritoController::class, 'actualizar'])->name('carrito.actualizar');
-
-
 
 Route::get('/pedidosCliente', [PedidoController::class, 'pedidosCliente'])->name('cliente.pedidos');
 
