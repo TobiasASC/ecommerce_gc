@@ -171,5 +171,10 @@ public function mostrarEspecifico($id)
         // Redireccionamos con el nombre correcto de tu ruta
         return redirect()->route('admin.productos.index')->with('success', 'Producto actualizado correctamente');
     }
+
+
+
+
+
 }
 

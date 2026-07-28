@@ -21,10 +21,9 @@
                     <i class="fas fa-box me-2"></i> Productos
                 </a>
 
-                <a class="nav-link text-nowrap {{ request()->routeIs('admin.categorias') ? 'activo' : 'text-dark' }}" href="{{ route('admin.categorias') }}">
-                    <i class="fas fa-user me-2"></i> Categorias
+                <a class="nav-link text-nowrap {{ request()->routeIs('admin.categorias.index') ? 'activo' : 'text-dark' }}" href="{{ route('admin.categorias.index') }}">
+                    <i class="fas fa-tags me-2"></i> Categorias
                 </a>
-
                 @else
                 <h2>Hola {{ Auth::user()->nombre }}</h2>
                 

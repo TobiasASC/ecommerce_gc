@@ -8,6 +8,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\PedidoController;
+use App\Http\Controllers\CategoriaController;
 
 Route::get('/', [InicioController::class, 'index'])->name('inicio');
 
@@ -63,12 +64,16 @@ Route::put('/admin/productos/{id}', [ProductoController::class, 'actualizar'])->
 // Eliminar un producto
 Route::delete('/admin/productos/{id}', [ProductoController::class, 'destroy'])->name('admin.productos.destroy');
 
+// Mostrar la vista con la tabla
+Route::get('/admin/categorias', [CategoriaController::class, 'index'])->name('admin.categorias.index');
+
+// Guardar una nueva categoría (Viene del Modal)
+Route::post('/categorias', [CategoriaController::class, 'store'])->name('admin.categorias.store');
+
+// Eliminar una categoría
+Route::delete('/categorias/{id}', [CategoriaController::class, 'destroy'])->name('admin.categorias.destroy');
 
 
-
-Route::get('/categorias', function () {
-    return view('admin.adminCategorias');
-})->name('admin.categorias');
 
 });
 

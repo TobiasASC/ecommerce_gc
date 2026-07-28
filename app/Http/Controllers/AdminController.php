@@ -10,7 +10,7 @@ use App\Models\Rol;
 class AdminController extends Controller
 {
     public function index(){
-        return view('admin.adminCategorias');
+        return view('admin/adminEstadisticas');
     }
 
 
