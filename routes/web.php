@@ -51,9 +51,20 @@ Route::get('/admin/pedidos', [PedidoController::class, 'pedidosAdmin'])->name('a
 
 
 
-Route::get('/productos', function () {
-    return view('admin.adminProductos');
-})->name('admin.productos');
+// Mostrar la lista de productos para el Admin
+Route::get('/admin/productos', [ProductoController::class, 'indexAdmin'])->name('admin.productos.index');
+
+// Mostrar el formulario para editar un producto (aún por crear la vista)
+Route::get('/admin/productos/{id}/editar', [ProductoController::class, 'edit'])->name('admin.productos.edit');
+
+// Recibir los datos y actualizar el producto
+Route::put('/admin/productos/{id}', [ProductoController::class, 'actualizar'])->name('admin.productos.update');
+
+// Eliminar un producto
+Route::delete('/admin/productos/{id}', [ProductoController::class, 'destroy'])->name('admin.productos.destroy');
+
+
+
 
 Route::get('/categorias', function () {
     return view('admin.adminCategorias');

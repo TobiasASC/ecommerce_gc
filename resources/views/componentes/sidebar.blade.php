@@ -17,8 +17,8 @@
                     <i class="fas fa-user me-2"></i> Pedidos
                 </a>
 
-                <a class="nav-link text-nowrap {{ request()->routeIs('admin.productos') ? 'activo' : 'text-dark' }}" href="{{ route('admin.productos') }}">
-                    <i class="fas fa-user me-2"></i> Productos
+                <a class="nav-link text-nowrap {{ request()->routeIs('admin.productos.index') ? 'activo' : 'text-dark' }}" href="{{ route('admin.productos.index') }}">
+                    <i class="fas fa-box me-2"></i> Productos
                 </a>
 
                 <a class="nav-link text-nowrap {{ request()->routeIs('admin.categorias') ? 'activo' : 'text-dark' }}" href="{{ route('admin.categorias') }}">
