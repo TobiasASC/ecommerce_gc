@@ -1,12 +1,13 @@
 <?php
 
-// 1. Crear la estructura de carpetas necesaria en la memoria temporal de Vercel
-$tmpStorage = '/tmp/storage';
+// 1. Crear el ecosistema de carpetas en la memoria RAM de Vercel
+$tmp = '/tmp/laravel';
 $directorios = [
-    $tmpStorage . '/framework/views',
-    $tmpStorage . '/framework/cache/data',
-    $tmpStorage . '/framework/sessions',
-    $tmpStorage . '/logs',
+    "$tmp/storage/framework/views",
+    "$tmp/storage/framework/cache/data",
+    "$tmp/storage/framework/sessions",
+    "$tmp/storage/logs",
+    "$tmp/bootstrap/cache",
 ];
 
 foreach ($directorios as $dir) {
@@ -15,10 +16,21 @@ foreach ($directorios as $dir) {
     }
 }
 
-// 2. Obligar a Laravel a usar esta zona segura para las vistas
-putenv("VIEW_COMPILED_PATH={$tmpStorage}/framework/views");
-$_ENV['VIEW_COMPILED_PATH'] = "{$tmpStorage}/framework/views";
-$_SERVER['VIEW_COMPILED_PATH'] = "{$tmpStorage}/framework/views";
+// 2. Obligar a Laravel a usar esta zona libre para TODO su caché
+$variables = [
+    'APP_CONFIG_CACHE' => "$tmp/bootstrap/cache/config.php",
+    'APP_EVENTS_CACHE' => "$tmp/bootstrap/cache/events.php",
+    'APP_PACKAGES_CACHE' => "$tmp/bootstrap/cache/packages.php",
+    'APP_ROUTES_CACHE' => "$tmp/bootstrap/cache/routes.php",
+    'APP_SERVICES_CACHE' => "$tmp/bootstrap/cache/services.php",
+    'VIEW_COMPILED_PATH' => "$tmp/storage/framework/views",
+];
 
-// 3. Encender la aplicación
+foreach ($variables as $key => $value) {
+    putenv("$key=$value");
+    $_ENV[$key] = $value;
+    $_SERVER[$key] = $value;
+}
+
+// 3. Encender la aplicación de forma segura
 require __DIR__ . '/../public/index.php';
