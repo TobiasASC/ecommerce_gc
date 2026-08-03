@@ -1,6 +1,7 @@
 @extends('plantilla')
-
 @section('contenido')
+
+<title>Mis datos</title>
 <!-- Cambiamos 'container' por 'container-fluid' y quitamos el padding horizontal con 'px-0' -->
 <div class="container-fluid px-0">
     <div class="row g-0"> <!-- g-0 quita los espacios predeterminados (gutters) entre columnas -->
@@ -8,10 +9,10 @@
         @include('componentes.sidebar')
 
         <!-- Contenido principal (Columna de 9/12 en Desktop) -->
-        <main class="col-12 col-md-9">
-            <div class="card shadow-sm border-0">
+        <main class="col-12 col-md-9 p-3 p-md-4">
+            <div class="card shadow-sm border-1 rounded-4">
                 <div class="card-body p-4">
-                    <h3 class="card-title mb-3 titulo">Mis Datos</h3>
+                    <h3 class="card-title mb-3 titulo fw-bold">Mis Datos</h3>
                     <hr>
                 
                     @if(session('success'))
@@ -25,7 +26,7 @@
                         @csrf
                         @method('PUT')
 
-                        <div class="row subtitulo">
+                        <div class="row subtitulo datos-cliente">
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">Nombre</label>
                                 <input type="text" class="form-control" name="nombre" value="{{ $usuario->nombre }}">
@@ -42,7 +43,7 @@
                             </div>
                         </div>
 
-                        <div class="row align-items-end subtitulo">
+                        <div class="row align-items-end subtitulo datos-cliente">
                             <div class="col-md-8 mb-3">
                                 <label class="form-label">Contraseña</label>
                                 <input type="password" class="form-control" value="********" disabled>
@@ -56,7 +57,7 @@
                         </div>
 
                         <div class="collapse {{ $errors->hasAny(['contraseña', 'contraseña_actual']) ? 'show' : '' }}" id="cambiarPassword">
-                            <div class="row mt-2 subtitulo">
+                            <div class="row mt-2 subtitulo datos-cliente">
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label">Contraseña actual</label>
                                     <input type="password" name="contraseña_actual" class="form-control">

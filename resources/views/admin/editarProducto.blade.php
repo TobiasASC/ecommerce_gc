@@ -1,28 +1,34 @@
 @extends('plantilla')
 @section('contenido')
+
+<title>Editar producto</title>
 <div class="container-fluid px-0">
     <div class="row g-0"> 
         @include('componentes.sidebar')
 
-        <main class="col-12 col-md-9 p-4">
+        <main class="col-12 col-md-9 p-3 p-md-4">
             
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h3 class="fw-bold text-secondary m-0">Editar Producto: <span class="text-primary">{{ $producto->nombre }}</span></h3>
-                <a href="{{ route('admin.productos.index') }}" class="btn btn-outline-secondary shadow-sm">
-                    <i class="fa-solid fa-arrow-left me-2"></i>Volver
-                </a>
-            </div>
-
-            <div class="card shadow-sm borde rounded-4 overflow-hidden">
+            <!-- TARJETA PRINCIPAL -->
+            <div class="card shadow-sm border-1 rounded-4 mb-4">
                 <div class="card-body p-4">
-                    <!-- IMPORTANTE: El enctype="multipart/form-data" es obligatorio para subir imágenes -->
-                    <form action="{{ route('admin.productos.update', $producto->id) }}" method="POST" enctype="multipart/form-data">
+                    
+                    <!-- ENCABEZADO Y BOTÓN VOLVER -->
+                    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-3 gap-3">
+                        <h3 class="card-title m-0 titulo fw-bold">Editar Producto: <span>{{ $producto->nombre }}</span></h3>
+                        <a href="{{ route('admin.productos.index') }}" class="btn boton-volver shadow-sm">
+                            <i class="fa-solid fa-arrow-left me-2"></i>Volver
+                        </a>
+                    </div>
+                    <hr>
+
+                    <!-- FORMULARIO -->
+                    <form action="{{ route('admin.productos.update', $producto->id) }}" method="POST" enctype="multipart/form-data" class="mt-4">
                         @csrf
                         @method('PUT')
 
                         <div class="row g-4">
                             <!-- Columna Izquierda: Datos del Producto -->
-                            <div class="col-12 col-lg-8">
+                            <div class="col-12 col-lg-8 subtitulo">
                                 
                                 <div class="mb-3">
                                     <label for="nombre" class="form-label fw-semibold">Nombre del Producto</label>
@@ -83,7 +89,7 @@
                             </div>
 
                             <!-- Columna Derecha: Imagen del Producto -->
-                            <div class="col-12 col-lg-4 d-flex flex-column align-items-center border-start border-light pt-3 pt-lg-0">
+                            <div class="col-12 col-lg-4 d-flex flex-column align-items-center border-start border-light pt-3 pt-lg-0 subtitulo">
                                 
                                 <label class="form-label fw-semibold w-100 text-center">Imagen Actual</label>
                                 
@@ -106,22 +112,20 @@
                                         <div class="invalid-feedback text-center">{{ $message }}</div>
                                     @enderror
                                 </div>
-
                             </div>
                         </div>
 
                         <hr class="my-4 text-muted">
 
                         <div class="d-flex justify-content-end">
-                            <button type="submit" class="btn btn-primary px-4 shadow-sm">
+                            <button type="submit" class="btn boton-nuevo px-4 shadow-sm subtitulo">
                                 <i class="fa-solid fa-floppy-disk me-2"></i>Guardar Cambios
                             </button>
                         </div>
-
                     </form>
-                </div>
-            </div>
-
+                    
+                </div> <!-- Fin del card-body -->
+            </div> <!-- Fin del card -->
         </main>
     </div>
 </div>

@@ -7,74 +7,24 @@ use Illuminate\Http\Request;
 
 class ProductoController extends Controller
 {
-    public function index()
-    {
-        $query = Producto::where('activo', true)
-            ->where('stock_actual', '>', 0);
-
-        if (request('buscar')) {
-            $query->where('nombre', 'like', '%' . request('buscar') . '%');
-        }
-
-        $productos = $query->get();
-
-        $categorias = Categoria::where('activo', true)->get();
-
-        return view('catalogo', compact(
-            'productos',
-            'categorias'
-        ));
-    }
-
-public function categoria($id)
-{
-    // 1. Iniciamos la consulta filtrando por la categoría, activo y stock
-    $query = Producto::where('categoria_id', $id)
-        ->where('activo', true)
-        ->where('stock_actual', '>', 0);
-
-    // 2. AGREGAMOS LA BÚSQUEDA: Si el usuario escribió algo en el buscador, lo filtramos
-    if (request('buscar')) {
-        $query->where('nombre', 'like', '%' . request('buscar') . '%');
-    }
-
-    // 3. Ejecutamos la consulta
-    $productos = $query->get();
-
-    $categorias = Categoria::where('activo', true)->get();
-
-    return view('catalogo', compact(
-        'productos',
-        'categorias'
-    ));
-}
-
-public function mostrarEspecifico($id)
-    {
-        $producto = Producto::with('categoria')
-        ->where('activo', true)
-        ->where('stock_actual', '>', 0)
-        ->findOrFail($id);
-
-        return view('infoProducto', compact(
-            'producto'
-        ));
-    }
-
-
-
-
     /**
      * Muestra la lista de productos para el administrador (con filtro por categoría)
      */
-    public function indexAdmin(Request $request)
+    public function index(Request $request)
     {
-        
         // Obtenemos todas las categorías para llenar el <select>
         $categorias = Categoria::all();
 
         // Iniciamos la consulta de productos
         $query = Producto::query();
+
+        // BÚSQUEDA DINÁMICA: Si el request trae un 'search', filtramos la consulta
+        if ($request->filled('search')) {
+            $query->where(function($q) use ($request) {
+                $q->where('nombre', 'like', '%' . $request->search . '%')
+                ->orWhere('descripcion', 'like', '%' . $request->search . '%');
+            });
+        }
 
         // Si el request trae un 'categoria_id', filtramos la consulta
         if ($request->filled('categoria_id')) {
@@ -90,18 +40,12 @@ public function mostrarEspecifico($id)
         return view('admin/adminProductos', compact('productos', 'categorias'));
     }
 
-    /**
-     * Elimina un producto de la base de datos
-     */
+    
+    // Elimina un producto de la base de datos
     public function destroy($id)
     {
         try {
             $producto = Producto::findOrFail($id);
-            
-            // Opcional: Eliminar la imagen del servidor si existe
-            // if ($producto->imagen_url && file_exists(public_path($producto->imagen_url))) {
-            //     unlink(public_path($producto->imagen_url));
-            // }
 
             $producto->delete();
 
@@ -112,9 +56,8 @@ public function mostrarEspecifico($id)
         }
     }
 
-    /**
-     * Muestra el formulario para editar un producto (Estructura base)
-     */
+    
+    // Muestra el formulario para editar un producto 
     public function edit($id)
     {
         $producto = Producto::findOrFail($id);
@@ -123,7 +66,8 @@ public function mostrarEspecifico($id)
         // Retornas a la vista de edición que crearás luego
         return view('admin/editarProducto', compact('producto', 'categorias'));
     }
-
+    
+    // Actualiza los campos de un producto
     public function actualizar(Request $request, $id)
     {
         $request->validate([
@@ -144,16 +88,18 @@ public function mostrarEspecifico($id)
         if ($request->hasFile('imagen')) {
             $archivo = $request->file('imagen');
             $nombre = time() . '_' . $archivo->getClientOriginalName();
-            
-            // Movemos la imagen nueva a la carpeta
-            $archivo->move(public_path('img/catalogo'), $nombre);
 
-            // Borramos la imagen vieja del servidor si existe y no es una ruta vacía
+            $carpetaDestino = public_path('img/productos');
+            if (!file_exists($carpetaDestino)) {
+                mkdir($carpetaDestino, 0755, true);
+            }
+
+            $archivo->move($carpetaDestino, $nombre);
+
             if ($producto->imagen_url && file_exists(public_path($producto->imagen_url))) {
                 unlink(public_path($producto->imagen_url));
             }
 
-            // Actualizamos la variable con la nueva ruta
             $rutaImagen = 'img/productos/' . $nombre;
         }
 
@@ -165,12 +111,84 @@ public function mostrarEspecifico($id)
             'stock_actual' => $request->stock_actual,
             'stock_minimo' => $request->stock_minimo,
             'categoria_id' => $request->categoria_id,
-            'imagen_url'   => $rutaImagen // Ojo aquí, asegúrate que sea tu nombre de columna
+            'imagen_url'   => $rutaImagen 
         ]);
 
         // Redireccionamos con el nombre correcto de tu ruta
         return redirect()->route('admin.productos.index')->with('success', 'Producto actualizado correctamente');
     }
+    
+    // Retorna la vista para crear un nuevo producto
+    public function crear()
+    {
+        $categorias = Categoria::where('activo', true)
+            ->get();
+
+        return view(
+            'admin.crearProducto',
+            compact('categorias')
+        );
+    }
+    
+    // Guarda los datos del  nuevo producto
+    public function guardar(Request $request)
+    {
+        $request->validate([
+
+            'nombre' => 'required|max:255',
+
+            'precio_venta' => 'required|numeric|min:0',
+
+            'stock_actual' => 'required|integer|min:0',
+
+            'stock_minimo' => 'required|integer|min:0',
+
+            'categoria_id' => 'required|exists:categorias,id',
+
+            'imagen' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048'
+        ]);
+
+        $rutaImagen = null;
+
+        if ($request->hasFile('imagen')) {
+            $archivo = $request->file('imagen');
+            $nombre = time() . '_' . $archivo->getClientOriginalName();
+
+            $carpetaDestino = public_path('img/productos');
+            if (!file_exists($carpetaDestino)) {
+                mkdir($carpetaDestino, 0755, true);
+            }
+
+            $archivo->move($carpetaDestino, $nombre);
+            $rutaImagen = 'img/productos/' . $nombre;
+        }
+
+        Producto::create([
+
+            'nombre' => $request->nombre,
+
+            'descripcion' => $request->descripcion,
+
+            'precio_venta' => $request->precio_venta,
+
+            'stock_actual' => $request->stock_actual,
+
+            'stock_minimo' => $request->stock_minimo,
+
+            'categoria_id' => $request->categoria_id,
+
+            'imagen_url' => $rutaImagen,
+
+            'activo' => true
+        ]);
+
+        return redirect()
+            ->route('admin.productos.crear')
+            ->with('success', 'Producto creado correctamente');
+    }
+
+
+    
 
 
 

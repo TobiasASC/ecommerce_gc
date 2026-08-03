@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class CarritoController extends Controller
 {
+    // Obtiene el ultimo pedido del cliente en estado "carrito" o crea un nuevo pedido en ese estado
     private function obtenerCarrito()
     {
     return Pedido::firstOrCreate(
@@ -25,6 +26,8 @@ class CarritoController extends Controller
     );
     }
 
+
+    // Muestra la vista del carrito junto con el detalle y metodo de pago
     public function index(){
         $carrito = $this->obtenerCarrito();
         $items = $carrito->detalles()->with('producto')->get();
@@ -34,7 +37,8 @@ class CarritoController extends Controller
     }
 
 
-
+   
+    // Recalcula el monto total del pedido
     private function recalcularTotal(Pedido $carrito)
     {
     // sum() suma todos los subtotales de los ítems del carrito
@@ -86,7 +90,7 @@ class CarritoController extends Controller
     }
 
 
-
+    // Vacia el carrito (elimina detalles del pedido)
     public function vaciar()
     {
     // Buscar el carrito activo del usuario 
@@ -140,7 +144,8 @@ class CarritoController extends Controller
 
         return back()->with('success', 'Cantidad actualizada correctamente.');
     }
-
+    
+    // Elimina un producto del carrito
     public function eliminar($id)
     {
         $carrito = $this->obtenerCarrito();
@@ -153,72 +158,66 @@ class CarritoController extends Controller
         return redirect()->route('carrito.mostrar')
                          ->with('success', 'Producto eliminado correctamente del carrito.');
     }
+    
+    // Procesa la compra y redirecciona a vista de compra confirmada
+    public function procesar(Request $request)
+    {
+    // Validamos el método de pago y que el comprobante sea una imagen segura
+    $request->validate([
+        'metodo_pago_id' => 'required|exists:metodo_pagos,id',
+        'comprobante'    => 'nullable|image|mimes:jpeg,png,jpg|max:5120', // Máximo 5MB
+    ]);
 
-    public function procesar(Request $request){
-        $request->validate([
-            'metodo_pago_id' => 'required|exists:metodo_pagos,id',
-            
-            // Validaciones de tarjeta
-            'numero_tarjeta' => 'required_if:metodo_pago_id,1|nullable|string',
-            'titular_tarjeta' => 'required_if:metodo_pago_id,1|nullable|string',
-            'vencimiento'    => 'required_if:metodo_pago_id,1|nullable|string',
-            'cvv'            => 'required_if:metodo_pago_id,1|nullable|string',
-            
-        ]);
+    $pedido = Pedido::where('usuario_id', Auth::id())
+                    ->where('estado', 'carrito')
+                    ->first();
 
-        $pedido = Pedido::where('usuario_id', Auth::id())
-                        ->where('estado', 'carrito')
-                        ->first();
+    // Si no hay carrito o no tiene productos, lo devolvemos
+    if (!$pedido || $pedido->detalles()->count() === 0) {
+        return redirect()->route('carrito.mostrar')->with('error', 'Tu carrito está vacío o la sesión expiró.');
+    }
 
-        // Si no hay carrito o no tiene productos, lo devolvemos
-        if (!$pedido || $pedido->detalles()->count() === 0) {
-            return redirect()->route('cliente.carrito')->with('error', 'Tu carrito está vacío o la sesión expiró.');
+    // --- VALIDACIÓN DE STOCK ANTES DE COMPRAR ---
+    foreach ($pedido->detalles as $detalle) {
+        $producto = $detalle->producto;
+        if ($detalle->cantidad > $producto->stock_actual) {
+            return redirect()->route('cliente.carrito')->with('error', 'Lo sentimos, no hay stock suficiente para el producto: ' . $producto->nombre . '. Stock disponible: ' . $producto->stock_actual);
         }
+    }
+    
+    $totalPedido = $pedido->detalles()->sum('subtotal');
+    $estadoFinal = 'pendiente'; 
+    $metodo = MetodoPago::find($request->metodo_pago_id);
 
-        // --- VALIDACIÓN DE STOCK ANTES DE COMPRAR ---
-        foreach ($pedido->detalles as $detalle) {
-            $producto = $detalle->producto;
-            
-            // Verificamos si la cantidad pedida es mayor al stock real
-            if ($detalle->cantidad > $producto->stock_actual) {
-                return redirect()->route('cliente.carrito')->with('error', 'Lo sentimos, no hay stock suficiente para el producto: ' . $producto->nombre . '. Stock disponible: ' . $producto->stock_actual);
+    // --- LÓGICA PARA GUARDAR EL COMPROBANTE ---
+    $rutaComprobante = null;
+    if ($request->hasFile('comprobante')) {
+        // Guarda la imagen en storage/app/public/comprobantes
+        $rutaComprobante = $request->file('comprobante')->store('comprobantes', 'public');
+    }
+
+    // Actualizar el pedido
+    $pedido->update([
+        'total'          => $totalPedido,
+        'estado'         => $estadoFinal, 
+        'metodo_pago_id' => $request->metodo_pago_id,
+        'fecha_venta'    => now(),
+        'comprobante_url'    => $rutaComprobante, // Guardamos la ruta de la imagen
+    ]);
+
+    // DESCONTAR STOCK DE LOS PRODUCTOS
+    foreach ($pedido->detalles as $detalle) {
+        $producto = $detalle->producto;
+        if ($producto) {
+            $producto->stock_actual -= $detalle->cantidad;
+            if ($producto->stock_actual < 0) {
+                $producto->stock_actual = 0;
             }
+            $producto->save();
         }
-        
-        // Obtener el total sumando los detalles (por seguridad)
-        $totalPedido = $pedido->detalles()->sum('subtotal');
+    }
 
-        
-        // Actualizar el pedido
-        $estadoFinal = 'confirmado'; 
-        $metodo = MetodoPago::find($request->metodo_pago_id);
-
-        if ($metodo && in_array($metodo->descripcion, ['Transferencia Bancaria'])) {
-            $estadoFinal = 'pendiente_pago';
-        }
-
-        
-        $pedido->update([
-            'total'          => $totalPedido,
-            'estado'         => $estadoFinal, 
-            'metodo_pago_id' => $request->metodo_pago_id,
-            'fecha_venta'    => now(),
-        ]);
-
-        // DESCONTAR STOCK DE LOS PRODUCTOS
-        foreach ($pedido->detalles as $detalle) {
-            $producto = $detalle->producto;
-            if ($producto) {
-                $producto->stock_actual -= $detalle->cantidad;
-                if ($producto->stock_actual < 0) {
-                    $producto->stock_actual = 0;
-                }
-                $producto->save();
-            }
-        }
-
-        // Redirigimos a la pantalla de éxito pasando el ID del pedido
-        return redirect()->route('compra.confirmada')->with('pedido_id', $pedido->id);
+    return redirect()->route('compra.confirmada')->with('pedido_id', $pedido->id);
     }
 
 

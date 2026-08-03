@@ -9,12 +9,14 @@ use App\Models\Usuario;
 
 class ClienteController extends Controller
 {
+    // Retorna la vista y los datos del cliente autenticado
     public function index()
     {
         $usuario = Auth::user();
         return view('cliente.clienteCuenta', compact('usuario'));
     }
-
+  
+    // Actualiza los datos del cliente, incluye confirmación de contraseña
     public function actualizar(Request $request)
     {
         // Agregamos required_with para obligar a poner la actual si escriben una nueva
@@ -33,8 +35,6 @@ class ClienteController extends Controller
         // Si el usuario intentó cambiar la contraseña
         if ($request->filled('contraseña')) {
             
-            // ATENCIÓN AQUÍ: Asegúrate de usar $usuario->password 
-            // (a menos que tu columna en BD se llame textualmente "contraseña")
             if (!Hash::check($request->contraseña_actual, $usuario->password)) {
                 return back()
                     ->withErrors([
@@ -53,4 +53,7 @@ class ClienteController extends Controller
             ->route('cliente.cuenta')
             ->with('success', 'Datos actualizados correctamente');
     }
+
+
+    
 }

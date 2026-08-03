@@ -7,16 +7,16 @@ use App\Models\Categoria;
 
 class CategoriaController extends Controller
 {
-        public function index(){
+    // Devuelve la vista con todas las categorias
+    public function index(){
         $categorias = Categoria::all();
 
         // Retornas a la vista de edición que crearás luego
         return view('admin/adminCategorias', compact('categorias'));
-        }
+    }
 
-        /**
-     * Guarda una nueva categoría en la base de datos.
-     */
+    
+    // Guarda una nueva categoría en la base de datos.
     public function store(Request $request)
     {
         // 1. Validamos que el nombre no venga vacío y no exista otra categoría igual
@@ -37,9 +37,8 @@ class CategoriaController extends Controller
         return redirect()->back()->with('success', 'Categoría creada correctamente.');
     }
 
-    /**
-     * Elimina una categoría.
-     */
+
+    // Elimina una categoria
     public function destroy($id)
     {
         try {
@@ -58,5 +57,29 @@ class CategoriaController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Ocurrió un error al intentar eliminar la categoría.');
         }
+    }
+
+
+    // Actualiza una categoría existente en la base de datos.
+    public function actualizar(Request $request, $id)
+    {
+        // Validamos que el nombre no venga vacío
+        $request->validate([
+            'nombre' => 'required|max:255',
+            'activo' => 'required|boolean'
+        ]);
+
+        // Buscamos la categoría y la actualizamos
+        $categoria = Categoria::findOrFail($id);
+        
+        $categoria->update([
+            'nombre' => $request->nombre,
+            'activo' => $request->activo
+        ]);
+
+        // Redirigimos a la misma vista con un mensaje de éxito
+        return redirect()
+            ->route('admin.categorias.index')
+            ->with('success', 'Categoría actualizada correctamente');
     }
 }

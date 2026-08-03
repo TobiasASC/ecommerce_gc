@@ -31,17 +31,14 @@
 
 
 <section class="seccion-categoria pt-4 pb-5" id="categorias">
-    <!-- El "container" agrupa el contenido y "contenedor-reducido" ajusta el ancho -->
     <div class="container contenedor-reducido">
-        <div class="text-center mb-5">
-            <h1 class="titulo-inicio fw-bold">Categorias</h1>
-            <p class="fs-4">Regala lo que mas gusta</p>
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h1 class="titulo-inicio fw-bold">Categorías</h1>
+            <p class="fs-4">Regala lo que más gusta</p>
         </div>
         
-        <!-- "justify-content-center" asegura que si sobran columnas, queden en el medio -->
         <div class="row justify-content-center text-center">
-            
-            <div class="col-md-4 mb-4">
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
                 <div class="card p-4 tarjeta-custom h-100">
                     <div class="card-body">
                         <i class="fa-solid fa-bag-shopping fs-1 mb-3"></i>
@@ -51,7 +48,7 @@
                 </div>
             </div>
 
-            <div class="col-md-4 mb-4">
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
                 <div class="card p-4 tarjeta-custom h-100">
                     <div class="card-body">
                         <i class="fa-regular fa-face-kiss-wink-heart fs-1 mb-3"></i>
@@ -61,7 +58,7 @@
                 </div>
             </div>
 
-            <div class="col-md-4 mb-4">
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
                 <div class="card p-4 tarjeta-custom h-100">
                     <div class="card-body">
                         <i class="fa-solid fa-key fs-1 mb-3"></i>
@@ -70,129 +67,158 @@
                     </div>
                 </div>
             </div>
-            
         </div>
     </div>
 </section>
 
 <section class="seccion-destacados py-5" id="destacados">
     <div class="container contenedor-reducido">
-        <h1 class="text-center titulo-inicio mb-5 fw-bold">Productos destacados</h1>
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h1 class="titulo-inicio fw-bold">Productos destacados</h1>
+        </div>
         
-        <div class="row justify-content-center text-center">
-            
-            <div class="col-md-4 mb-4">
-                <div class="card p-3 tarjeta-custom h-100">
+        <!-- Contenedor principal que oculta lo que se sale de la pantalla -->
+        <div class="marquee-container" data-aos="fade-up" data-aos-delay="100">
+            <!-- La pista que se mueve -->
+            <div class="marquee-track">
+                
+
+                <!-- Tarjeta 1 -->
+                <div class="card p-3 tarjeta-custom tarjeta-slider">
                     <div class="card-body">
-                        <span class="d-block mb-3 bg-light p-4 rounded">imagen</span>
-                        <h2 class="fw-bold fs-4">Producto</h2>
-                        <p class="fs-6">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <img src="img/destacados/atrapa-sueños-vive.jpeg" alt="Producto de Graciela Cueba" class="img-destacada-ajustada mb-3">
+                        <h2 class="fw-bold fs-4">Atrapasueños Vive</h2>
+                        <p class="fs-6 text-muted">Detalles encapsulados para llevar un pedacito de arte a todos lados.</p>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-md-4 mb-4">
-                <div class="card p-3 tarjeta-custom h-100">
+                <!-- Tarjeta 2 -->
+                <div class="card p-3 tarjeta-custom tarjeta-slider">
                     <div class="card-body">
-                        <span class="d-block mb-3 bg-light p-4 rounded">imagen</span>
-                        <h2 class="fw-bold fs-4">Producto</h2>
-                        <p class="fs-6">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <img src="img/destacados/bolsa-arpillera-cuadrados.jpeg" alt="Producto de Graciela Cueba" class="img-destacada-ajustada mb-3">
+                        <h2 class="fw-bold fs-4">Bolsa Arpillera</h2>
+                        <p class="fs-6 text-muted">Calidez y estilo rústico para llevar.</p>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-md-4 mb-4">
-                <div class="card p-3 tarjeta-custom h-100">
+                <!-- Tarjeta 3 -->
+                <div class="card p-3 tarjeta-custom tarjeta-slider">
                     <div class="card-body">
-                        <span class="d-block mb-3 bg-light p-4 rounded">imagen</span>
-                        <h2 class="fw-bold fs-4">Producto</h2>
-                        <p class="fs-6">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <img src="img/destacados/bolso-lienzo-tela.jpeg" alt="Producto de GC" class="img-destacada-ajustada mb-3">
+                        <h2 class="fw-bold fs-4">Bolsa de tela</h2>
+                        <p class="fs-6 text-muted">Práctica, cómoda y con un diseño que destaca del resto.</p>
                     </div>
                 </div>
-            </div>
-
-            <div class="col-md-4 mb-4">
-                <div class="card p-3 tarjeta-custom h-100">
+                
+                <!-- Tarjeta 4 -->
+                <div class="card p-3 tarjeta-custom tarjeta-slider">
                     <div class="card-body">
-                        <span class="d-block mb-3 bg-light p-4 rounded">imagen</span>
-                        <h2 class="fw-bold fs-4">Producto</h2>
-                        <p class="fs-6">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <img src="img/destacados/bolsa-baño.jpeg" alt="Producto de GC" class="img-destacada-ajustada mb-3">
+                        <h2 class="fw-bold fs-4">Bolsa para Baño</h2>
+                        <p class="fs-6 text-muted">Un toque especial para organizar tus espacios con estilo.</p>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-md-4 mb-4">
-                <div class="card p-3 tarjeta-custom h-100">
+                <!-- ================= GRUPO 2 (Duplicado exacto para el efecto infinito) ================= -->
+                <!-- Tarjeta 1 -->
+                <div class="card p-3 tarjeta-custom tarjeta-slider">
                     <div class="card-body">
-                        <span class="d-block mb-3 bg-light p-4 rounded">imagen</span>
-                        <h2 class="fw-bold fs-4">Producto</h2>
-                        <p class="fs-6">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <img src="img/destacados/1785696115_casa-decorativa.jpeg" alt="Producto de GC" class="img-destacada-ajustada mb-3">
+                        <h2 class="fw-bold fs-4">Casa decorativa</h2>
+                        <p class="fs-6 text-muted">Diseño único y artesanal, ideal para acompañar tus tardes.</p>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-md-4 mb-4">
-                <div class="card p-3 tarjeta-custom h-100">
+                <!-- Tarjeta 2 -->
+                <div class="card p-3 tarjeta-custom tarjeta-slider">
                     <div class="card-body">
-                        <span class="d-block mb-3 bg-light p-4 rounded">imagen</span>
-                        <h2 class="fw-bold fs-4">Producto</h2>
-                        <p class="fs-6">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <img src="img/destacados/atrapa-sueños-vive.jpeg" alt="Producto de GC" class="img-destacada-ajustada mb-3">
+                        <h2 class="fw-bold fs-4">Atrapasueños Vive</h2>
+                        <p class="fs-6 text-muted">Detalles encapsulados para llevar un pedacito de arte a todos lados.</p>
                     </div>
                 </div>
-            </div>
 
+                <!-- Tarjeta 3 -->
+                <div class="card p-3 tarjeta-custom tarjeta-slider">
+                    <div class="card-body">
+                        <img src="img/destacados/bolsa-arpillera-cuadrados.jpeg" alt="Producto de GC" class="img-destacada-ajustada mb-3">
+                        <h2 class="fw-bold fs-4">Bolsa Arpillera</h2>
+                        <p class="fs-6 text-muted">Calidez y estilo rústico para llevar.</p>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 4 -->
+                <div class="card p-3 tarjeta-custom tarjeta-slider">
+                    <div class="card-body">
+                        <img src="img/destacados/bolso-lienzo-tela.jpeg" alt="Producto de GC" class="img-destacada-ajustada mb-3">
+                        <h2 class="fw-bold fs-4">Bolsa de tela</h2>
+                        <p class="fs-6 text-muted">Práctica, cómoda y con un diseño que destaca del resto.</p>
+                    </div>
+                </div>
+                
+                <!-- Tarjeta 5 -->
+                <div class="card p-3 tarjeta-custom tarjeta-slider">
+                    <div class="card-body">
+                        <img src="img/destacados/bolsa-baño.jpeg" alt="Producto de GC" class="img-destacada-ajustada mb-3">
+                        <h2 class="fw-bold fs-4">Bolsa para Baño</h2>
+                        <p class="fs-6 text-muted">Un toque especial para organizar tus espacios con estilo.</p>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
 </section>
 
+<!-- SECCIÓN DE CONTACTO DINÁMICA (Sin bg-light para que tome el var(--rosa)) -->
 <section class="seccion-contacto py-5" id="contacto">
-    <!-- El "container" agrupa el contenido y "contenedor-reducido" ajusta el ancho -->
     <div class="container contenedor-reducido">
-        <div class="text-center mb-5">
+        <div class="text-center mb-5" data-aos="fade-down">
             <h1 class="titulo-inicio mt-4 fw-bold">Contacto</h1>
+            <p class="subtitulo fs-4">Estamos aquí para ayudarte a crear el regalo perfecto.</p>
         </div>
         
-        <!-- "justify-content-center" asegura que si sobran columnas, queden en el medio -->
-        <div class="row justify-content-center text-start">
-            <div class="col-md-12 mb-4">
-                <div class="card p-4 tarjeta-contacto-custom h-100">
-                    <div class="card-body">
-                        <h2 class="fw-bold fs-3">Información de Contacto</h2>
-
-                        <div class="mb-3">
-                            <strong><i class="fa-brands fa-whatsapp"></i> Teléfono</strong><br>
-                            <span>+54 3794-382461</span>
-                        </div>
-
-                        <div class="mb-3">
-                            <strong><i class="fa-solid fa-envelope"></i> Email</strong><br>
-                            <span>gcdiseños@gmail.com</span>
-                        </div>
-
-                        <div class="mb-3">
-                            <strong><i class="fa-solid fa-clock"></i> Horarios de Atención</strong><br>
-                            <span>Lun - Vie: 9:00 - 12:00 / 17:00 - 21:00</span><br>
-                            <span>Sab: 9:00 - 13:00</span>
-                        </div>
-                          
-                        <div class="mb-3">
-                            <strong><i class="fa-brands fa-instagram"></i> Instagram</strong><br>
-                            <span>@gcdiseños</span>
-                        </div>
-
-                        <div class="mb-3">
-                            <strong><i class="fa-brands fa-square-facebook"></i> Facebook </strong><br>
-                            <span>@gc_diseños</span>
-                        </div>
-                    </div>
-                    </div>
-
-
+        <div class="row justify-content-center text-center g-4">
             
+            <!-- WhatsApp -->
+            <div class="col-12 col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="100">
+                <div class="card h-100 p-4 tarjeta-contacto shadow-sm border-0 rounded-4">
+                    <div class="icono-flotante mb-3 text-success">
+                        <i class="fa-brands fa-whatsapp" style="font-size: 3rem;"></i>
+                    </div>
+                    <h4 class="fw-bold">WhatsApp</h4>
+                    <p class="text-muted mb-4">-</p>
+                    <a href="#" class="btn btn-outline-success rounded-pill mt-auto fw-bold">Enviar mensaje</a>
+                </div>
+            </div>
+
+            <!-- Email -->
+            <div class="col-12 col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="200">
+                <div class="card h-100 p-4 tarjeta-contacto shadow-sm border-0 rounded-4">
+                    <div class="icono-flotante mb-3 text-primary">
+                        <i class="fa-brands fa-square-facebook" style="font-size: 3rem;"></i>
+                    </div>
+                    <h4 class="fw-bold">Facebook</h4>
+                    <p class="text-muted mb-4 small">-</p>
+                    <a href="#" class="btn btn-outline-primary rounded-pill mt-auto fw-bold">Seguir pagina</a>
+                </div>
+            </div>
+
+            <!-- Redes -->
+            <div class="col-12 col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="400">
+                <div class="card h-100 p-4 tarjeta-contacto shadow-sm border-0 rounded-4">
+                    <div class="icono-flotante mb-3" style="color: #E1306C;">
+                        <i class="fa-brands fa-instagram" style="font-size: 3rem;"></i>
+                    </div>
+                    <h4 class="fw-bold">Instagram</h4>
+                    <p class="text-muted mb-4">@gcdiseños</p>
+                    <a href="https://www.instagram.com/gracielacueba/" class="btn btn-outline-dark rounded-pill mt-auto fw-bold">Seguir página</a>
+                </div>
+            </div>
+
         </div>
     </div>
 </section>
-
 
 
 @endsection

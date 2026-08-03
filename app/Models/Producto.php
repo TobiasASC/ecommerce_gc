@@ -20,6 +20,7 @@ class Producto extends Model
         'stock_minimo',
         'activo',
         'imagen',
+        'imagen_url',
         'categoria_id',
     ];
 

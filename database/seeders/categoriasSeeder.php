@@ -14,9 +14,9 @@ class categoriasSeeder extends Seeder
     public function run(): void
     {
     $categorias =[
-    ['nombre' => 'Bolsos', 'descripcion' => 'Bolsos de tela utiles para todo tipo de uso'],
-    ['nombre' => 'Llaveros', 'descripcion' => 'Llaveros para darle vida a lo que te importa'],
-    ['nombre' => 'Decoraciones', 'descripcion' => 'Decora cada rincon de tu hogar'],
+    ['nombre' => 'Bolsos'],
+    ['nombre' => 'Llaveros'],
+    ['nombre' => 'Decoraciones'],
     ];
     foreach ($categorias as $categoria) {
     Categoria::firstOrCreate(['nombre' => $categoria['nombre']], $categoria);

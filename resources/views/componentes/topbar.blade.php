@@ -11,11 +11,11 @@
                 <!-- Dropdown Admin -->
                 <div class="dropdown">
                     <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" class="text-decoration-none">
-                        <i class="fa-solid fa-circle-user color-icono"></i>
+                        <i class="fa-solid fa-circle-user color-iconos-topbar"></i>
                     </a>
                     
                     <ul class="dropdown-menu dropdown-menu-end fs-6">
-                        <li><a class="dropdown-item" href="{{ route('admin.cuenta') }}">Mi perfil</a></li>
+                        <li><a class="dropdown-item" href="{{ route('admin.clientes') }}">Gestionar</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li>
                             <form action="/logout" method="POST" class="m-0 p-0">
@@ -29,12 +29,12 @@
             @else
                 
                 <!-- Ícono carrito (solo cliente) -->
-                <a href="{{ route('carrito.mostrar') }}"><i class="fa-solid fa-cart-shopping color-icono"></i></a>
+                <a href="{{ route('carrito.mostrar') }}"><i class="fa-solid fa-cart-shopping color-iconos-topbar"></i></a>
 
                 <!-- Dropdown Cliente -->
                 <div class="dropdown">
                     <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" class="text-decoration-none">
-                        <i class="fa-solid fa-circle-user color-icono"></i>
+                        <i class="fa-solid fa-circle-user color-iconos-topbar"></i>
                     </a>
                     
                     <ul class="dropdown-menu dropdown-menu-end fs-6">
@@ -54,7 +54,7 @@
         @else
             <!-- Invitado (Sin dropdown, te lleva directo al login) -->
             <a href="/login">
-                <i class="fa-solid fa-circle-user color-icono"></i>
+                <i class="fa-solid fa-circle-user color-iconos-topbar"></i>
             </a>
             
         @endauth

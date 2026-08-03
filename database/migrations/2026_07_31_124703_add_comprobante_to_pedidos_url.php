@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categorias', function (Blueprint $table) {
-            $table->id();
-            $table->string('nombre');
-            $table->boolean('activo')->default(true);
-            $table->timestamps();
-            $table->softDeletes();
+        Schema::table('pedidos', function (Blueprint $table) {
+        $table->string('comprobante_url')->nullable()->after('metodo_pago_id'); 
         });
     }
 
@@ -25,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categorias');
+        Schema::table('pedidos', function (Blueprint $table) {
+            $table->dropColumn('comprobante_url');
+        });
     }
 };

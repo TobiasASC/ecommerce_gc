@@ -9,54 +9,41 @@ use App\Models\Rol;
 
 class AdminController extends Controller
 {
-    public function index(){
-        return view('admin/adminEstadisticas');
-    }
 
-
-        public function clientes(Request $request)
+    // Muestra clientes en el panel del admin
+    public function clientes(Request $request)
     {
-        $query = Usuario::where('rol_id', 2);
+        // Iniciamos la consulta de usuarios/clientes
+        $query = Usuario::query(); 
 
-        if ($request->filled('buscar')) {
-            $query->where(function ($q) use ($request) {
-                $q->where('nombre', 'like', '%' . $request->buscar . '%')
-                ->orWhere('apellido', 'like', '%' . $request->buscar . '%');
+        // BUSCADOR: Filtramos por nombre, apellido o email
+        if ($request->filled('search')) {
+            $query->where(function($q) use ($request) {
+                $q->where('nombre', 'like', '%' . $request->search . '%')
+                  ->orWhere('apellido', 'like', '%' . $request->search . '%')
+                  ->orWhere('email', 'like', '%' . $request->search . '%');
             });
         }
 
-        $clientes = $query->latest()->get();
+        // FILTRO POR ROL: Filtramos usando la relación 'rol'
+        if ($request->filled('rol')) {
+            $query->whereHas('rol', function($q) use ($request) {
+                $q->where('nombre', $request->rol); // Busca exactamente "admin" o "cliente"
+            });
+        }
 
-        $totalClientes = Usuario::where('rol_id', 2)->count();
+        // Ejecutamos la consulta ordenando por los más recientes
+        $clientes = $query->orderBy('created_at', 'desc')->paginate(10); 
 
-        $clientesNuevos = Usuario::where('rol_id', 2)
-            ->where('created_at', '>=', now()->subDays(30))
-            ->count();
+        // Mantenemos los parámetros de búsqueda en la URL de paginación
+        $clientes->appends($request->all());
 
-
-        $clientes = Usuario::where('rol_id', 2)
-            ->withCount('pedidos')
-            ->when($request->filled('buscar'), function ($q) use ($request) {
-                $q->where(function ($q2) use ($request) {
-                    $q2->where('nombre', 'like', '%' . $request->buscar . '%')
-                    ->orWhere('apellido', 'like', '%' . $request->buscar . '%');
-                });
-            })
-            ->latest()
-            ->get();
-        
-            $topCompradorId = $clientes->sortByDesc('pedidos_count')->first()?->id;
-
-        return view('admin.adminClientes', compact(
-            'clientes',
-            'totalClientes',
-            'clientesNuevos',
-            'topCompradorId'
-        ));
+        return view('admin.adminClientes', compact('clientes')); // Ajusta el nombre de la vista
     }
 
-
-public function hacerAdmin($id)
+    
+    // Cambia el rol del usuario a rol ADMIN
+    public function hacerAdmin($id)
     {
         try {
             $cliente = Usuario::findOrFail($id);
@@ -75,12 +62,12 @@ public function hacerAdmin($id)
             return redirect()->back()->with('success', 'El usuario ' . $cliente->nombre . ' ahora es administrador.');
 
         } catch (\Exception $e) {
-            // Quita el comentario de la siguiente línea si quieres ver el error exacto en pantalla para debugear:
-            // dd($e->getMessage()); 
+
             return redirect()->back()->with('error', 'Ocurrió un error al intentar actualizar el rol del usuario.');
         }
     }
-
+    
+    // Cambia el rol del usuario a rol CLIENTE
     public function hacerCliente($id)
     {
         try {

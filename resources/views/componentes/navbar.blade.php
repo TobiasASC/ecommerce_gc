@@ -5,9 +5,9 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
+            <div class="navbar-nav fw-bold">
                 <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" aria-current="page" href="/">INICIO</a>
-                <a class="nav-link {{ request()->is('catalogo') || request()->is('categorias/*')? 'active' : '' }}" href="/catalogo">CATALOGO</a>
+                <a class="nav-link {{ request()->is('catalogo') || request()->is('categorias/*')? 'active' : '' }}" href="/catalogo">CATÁLOGO</a>
                 <a class="nav-link {{ request()->is('contacto') ? 'active' : '' }}" href="{{ route('inicio') }}#categorias">DESTACADOS</a>
                 <a class="nav-link {{ request()->is('contacto') ? 'active' : '' }}" href="{{ route('inicio') }}#contacto">CONTACTO</a>
             </div>

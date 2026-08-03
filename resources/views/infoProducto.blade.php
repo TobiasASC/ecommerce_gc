@@ -8,7 +8,7 @@
             
             <!-- Botón Volver arriba a la izquierda -->
             <div class="mb-3 text-start">
-                <a href="{{ route('catalogo') }}" class="btn boton-volver-catalogo">
+                <a href="{{ route('catalogo') }}" class="btn boton-volver">
                     <i class="fa-solid fa-arrow-left me-2"></i>Volver al catálogo
                 </a>
             </div>
@@ -99,7 +99,7 @@
                 <h4 class="fw-bold mb-2">¡Producto agregado!</h4>
                 <p class="text-muted">El artículo se añadió a tu carrito correctamente.</p>
                 <div class="mt-4 d-flex justify-content-center gap-2">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Seguir comprando</button>
+                    <button type="button" class="btn boton-seguir-compra rounded-pill " data-bs-dismiss="modal">Seguir comprando</button>
                     <!-- Usamos el name() de tu ruta GET para ir al carrito -->
                     <a href="{{ route('carrito.mostrar') }}" class="btn boton-agregar">Ir a mi carrito</a>
                 </div>

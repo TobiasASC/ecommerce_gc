@@ -18,6 +18,7 @@ class Pedido extends Model
         'total',
         'estado',
         'metodo_pago_id',
+        'comprobante_url',
         'fecha_venta',
     ];
 
