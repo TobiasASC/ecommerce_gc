@@ -8,8 +8,12 @@
     ],
     "routes": [
         {
-            "src": "/(build|css|js|img|images|storage)/(.*)",
+            "src": "/(build|css|js|img|images|storage|bootstrap)/(.*)",
             "dest": "/public/$1/$2"
+        },
+        {
+            "src": "/(.*\\.(css|js|png|jpg|jpeg|gif|svg|ico|webp|woff2?|ttf|map))",
+            "dest": "/public/$1"
         },
         {
             "src": "/(.*)",
