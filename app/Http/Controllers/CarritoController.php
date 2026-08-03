@@ -7,6 +7,7 @@ use App\Models\Pedido;
 use App\Models\MetodoPago;
 use App\Models\Producto;
 use Illuminate\Support\Facades\Auth;
+use Cloudinary\Cloudinary;
 
 class CarritoController extends Controller
 {
@@ -189,20 +190,28 @@ class CarritoController extends Controller
     $estadoFinal = 'pendiente'; 
     $metodo = MetodoPago::find($request->metodo_pago_id);
 
-    // --- LÓGICA PARA GUARDAR EL COMPROBANTE ---
-    $rutaComprobante = null;
+    // --- LÓGICA PARA GUARDAR EL COMPROBANTE EN CLOUDINARY ---
+    $comprobanteUrl = null;
     if ($request->hasFile('comprobante')) {
-        // Guarda la imagen en storage/app/public/comprobantes
-        $rutaComprobante = $request->file('comprobante')->store('comprobantes', 'public');
+        $cloudinary = new Cloudinary(env('CLOUDINARY_URL'));
+        $resultado = $cloudinary->uploadApi()->upload(
+            $request->file('comprobante')->getRealPath(),
+            [
+                'folder' => 'comprobantes',
+                'resource_type' => 'image',
+            ]
+        );
+
+        $comprobanteUrl = $resultado['secure_url'] ?? null;
     }
 
     // Actualizar el pedido
     $pedido->update([
         'total'          => $totalPedido,
-        'estado'         => $estadoFinal, 
+        'estado'         => $estadoFinal,
         'metodo_pago_id' => $request->metodo_pago_id,
         'fecha_venta'    => now(),
-        'comprobante_url'    => $rutaComprobante, // Guardamos la ruta de la imagen
+        'comprobante_url' => $comprobanteUrl,
     ]);
 
     // DESCONTAR STOCK DE LOS PRODUCTOS

@@ -122,9 +122,8 @@
                         <h5 class="fw-bold mb-3 titulo"><i class="fa-solid fa-receipt me-2"></i>Comprobante de Pago</h5>
                         <div class="card border-1 shadow-sm rounded-4" style="max-width: 400px;">
                             <div class="card-body text-center p-2">
-                                <!-- Se usa asset('storage/...') para acceder a la imagen -->
-                                <a href="{{ asset('storage/' . $pedido->comprobante_url) }}" target="_blank" title="Clic para ampliar">
-                                    <img src="{{ asset('storage/' . $pedido->comprobante_url) }}" alt="Comprobante de transferencia" class="img-fluid rounded-3" style="max-height: 300px; object-fit: contain;">
+                                <a href="{{ $pedido->comprobante_url }}" target="_blank" title="Clic para ampliar">
+                                    <img src="{{ $pedido->comprobante_url }}" alt="Comprobante de transferencia" class="img-fluid rounded-3" style="max-height: 300px; object-fit: contain;">
                                 </a>
                                 <p class="text-muted small mt-2 mb-1">Clic en la imagen para ampliar</p>
                             </div>
