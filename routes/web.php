@@ -13,6 +13,17 @@ use App\Http\Controllers\ClientePedidoController;
 use App\Http\Controllers\AdminPedidoController;
 use App\Http\Controllers\CatalogoController;
 
+// Debug route to inspect APP_URL and config('app.url') in production
+Route::get('/__debug/app-url', function () {
+    return response()->json([
+        'env_APP_URL' => env('APP_URL'),
+        "config_app_url" => config('app.url'),
+        'forced_root' => \Illuminate\Support\Facades\URL::getRootUrl(),
+        'request_full_url' => request()->fullUrl(),
+        'request_host' => request()->getHost(),
+    ]);
+});
+
 Route::get('/', [InicioController::class, 'index'])->name('inicio');
 
 Route::get('/login', [AuthController::class, 'formularioLogin'])->name('login');
