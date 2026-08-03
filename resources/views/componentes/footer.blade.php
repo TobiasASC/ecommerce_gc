@@ -2,7 +2,7 @@
         <div class="row">
             <!--logo de la empresa-->
             <div class="col-md-3 d-flex align-items-center">
-                <img src="/img/logo.png" class="logo-footer">
+                <img src="/img/logo.PNG" class="logo-footer">
             </div>
             <!--navegacion de la pagina-->
             <div class="col-md-3">

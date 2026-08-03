@@ -1,7 +1,7 @@
 <div class="container-fluid d-flex align-items-center justify-content-between diseño-topbar">
     <!--logo en letras de la empresa-->
     <div class="d-flex align-items-center">
-        <img src="/img/logo.png" class="logo">
+        <img src="/img/logo.PNG" class="logo">
     </div>
 
     <!--iconos-->
