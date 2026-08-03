@@ -40,6 +40,8 @@ class AppServiceProvider extends ServiceProvider
             }
             $url = rtrim($url, '/');
             if (preg_match('/^https?:\/\//', $url)) {
+                // Actualiza la configuración y fuerza la URL raíz
+                config(['app.url' => $url]);
                 URL::forceRootUrl($url);
             }
         }
