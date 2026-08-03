@@ -23,5 +23,13 @@ class AppServiceProvider extends ServiceProvider
         if (env('APP_ENV') === 'production') {
             URL::forceScheme('https');
         }
+
+        // Normaliza la URL base para que los assets se generen con el dominio correcto
+        if (!empty(env('APP_URL'))) {
+            $url = rtrim(env('APP_URL'), '/');
+            if (str_starts_with($url, 'https://') || str_starts_with($url, 'http://')) {
+                URL::forceRootUrl($url);
+            }
+        }
     }
 }
