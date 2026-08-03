@@ -12,6 +12,7 @@
   ],
   "routes": [
     { "src": "/css/(.*)", "dest": "/public/css/$1" },
+    { "src": "/img/logo.png", "dest": "/public/img/logo.PNG" },
     { "src": "/js/(.*)", "dest": "/public/js/$1" },
     { "src": "/img/(.*)", "dest": "/public/img/$1" },
     { "src": "/bootstrap/(.*)", "dest": "/public/bootstrap/$1" },
