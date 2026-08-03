@@ -25,9 +25,21 @@ class AppServiceProvider extends ServiceProvider
         }
 
         // Normaliza la URL base para que los assets se generen con el dominio correcto
-        if (!empty(env('APP_URL'))) {
-            $url = rtrim(env('APP_URL'), '/');
-            if (str_starts_with($url, 'https://') || str_starts_with($url, 'http://')) {
+        $rawAppUrl = env('APP_URL');
+        if (!empty($rawAppUrl)) {
+            $url = trim($rawAppUrl);
+            // Si viene en formato Markdown [text](https://domain), extraer la URL
+            if (preg_match('/\[.*?\]\((https?:\/\/[^)]+)\)/', $url, $matches)) {
+                $url = $matches[1];
+            }
+            // Si no arranca con http(s), intentar extraer cualquier substring http(s)
+            if (!preg_match('/^https?:\/\//', $url)) {
+                if (preg_match('/(https?:\/\/[^\s]+)/', $url, $m2)) {
+                    $url = $m2[1];
+                }
+            }
+            $url = rtrim($url, '/');
+            if (preg_match('/^https?:\/\//', $url)) {
                 URL::forceRootUrl($url);
             }
         }
