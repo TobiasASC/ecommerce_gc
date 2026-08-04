@@ -68,7 +68,7 @@
                 
                 <!-- Área de la Imagen -->
                 <div class="card-img-container">
-                    <img src="{{ asset($producto->imagen_url) }}" class="card-img-top-catalog" alt="{{ $producto->nombre }}">
+                    <img src="{{ $producto->imagen_url }}" class="card-img-top-catalog" alt="{{ $producto->nombre }}">
                 </div>
                 
                 <div class="card-body d-flex flex-column p-3">

@@ -1,0 +1,19 @@
+{
+"roles": [
+	{
+		"id" : 1,
+		"nombre" : "admin",
+		"descripcion" : "Administrador del sistema",
+		"created_at" : "2026-07-18 17:35:21",
+		"updated_at" : "2026-07-18 17:35:21",
+		"deleted_at" : null
+	},
+	{
+		"id" : 2,
+		"nombre" : "cliente",
+		"descripcion" : "Cliente del ecommerce",
+		"created_at" : "2026-07-18 17:35:21",
+		"updated_at" : "2026-07-18 17:35:21",
+		"deleted_at" : null
+	}
+]}
