@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\File;
 
 class productosProduccionSeeder extends Seeder
 {
-    private const CLOUDINARY_BASE_URL = 'https://res.cloudinary.com/itqrze8h/image/upload/v1785812234/home/productos/';
+    private const CLOUDINARY_BASE_URL = 'https://res.cloudinary.com/itqrze8h/image/upload/';
 
     /**
      * Run the database seeds.

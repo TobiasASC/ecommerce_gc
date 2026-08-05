@@ -141,3 +141,9 @@ Route::get('/mis-pedidos/{id}', [ClientePedidoController::class, 'detalle'])->na
 
 
 });
+
+Route::get('/keep-alive', function () {
+    // Hace una consulta ultra rápida que no consume recursos
+    DB::select('SELECT 1'); 
+    return response()->json(['status' => 'Base de datos activa y despierta']);
+});
