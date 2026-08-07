@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Producto;
 use App\Models\Categoria;
+use App\Support\MediaStorage;
 use Illuminate\Http\Request;
 
 class ProductoController extends Controller
@@ -87,20 +88,12 @@ class ProductoController extends Controller
         // Si el usuario sube un archivo nuevo
         if ($request->hasFile('imagen')) {
             $archivo = $request->file('imagen');
-            $nombre = time() . '_' . $archivo->getClientOriginalName();
 
-            $carpetaDestino = public_path('img/productos');
-            if (!file_exists($carpetaDestino)) {
-                mkdir($carpetaDestino, 0755, true);
+            if ($producto->imagen_url) {
+                MediaStorage::delete($producto->imagen_url);
             }
 
-            $archivo->move($carpetaDestino, $nombre);
-
-            if ($producto->imagen_url && file_exists(public_path($producto->imagen_url))) {
-                unlink(public_path($producto->imagen_url));
-            }
-
-            $rutaImagen = 'img/productos/' . $nombre;
+            $rutaImagen = MediaStorage::store($archivo, 'img/productos');
         }
 
         // Actualizamos los datos en la base de datos
@@ -151,16 +144,7 @@ class ProductoController extends Controller
         $rutaImagen = null;
 
         if ($request->hasFile('imagen')) {
-            $archivo = $request->file('imagen');
-            $nombre = time() . '_' . $archivo->getClientOriginalName();
-
-            $carpetaDestino = public_path('img/productos');
-            if (!file_exists($carpetaDestino)) {
-                mkdir($carpetaDestino, 0755, true);
-            }
-
-            $archivo->move($carpetaDestino, $nombre);
-            $rutaImagen = 'img/productos/' . $nombre;
+            $rutaImagen = MediaStorage::store($request->file('imagen'), 'img/productos');
         }
 
         Producto::create([

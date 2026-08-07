@@ -18,7 +18,7 @@
                 
                 <!-- Contenedor de la Imagen (Fondo sutil y tamaño controlado) -->
                 <div class="bg-light p-4 text-center">
-                    <img src="{{ asset($producto->imagen_url) }}" 
+                    <img src="{{ \App\Support\MediaStorage::resolveUrl($producto->imagen_url) }}" 
                          class="img-fluid" 
                          style="max-height: 350px; width: 100%; object-fit: contain;" 
                          alt="{{ $producto->nombre }}">

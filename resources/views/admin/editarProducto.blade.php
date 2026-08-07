@@ -95,7 +95,7 @@
                                 
                                 <div class="mb-3 text-center">
                                     @if($producto->imagen_url)
-                                        <img src="{{ asset($producto->imagen_url) }}" alt="{{ $producto->nombre }}" class="img-thumbnail rounded shadow-sm" style="max-width: 200px; height: auto;">
+                                        <img src="{{ \App\Support\MediaStorage::resolveUrl($producto->imagen_url) }}" alt="{{ $producto->nombre }}" class="img-thumbnail rounded shadow-sm" style="max-width: 200px; height: auto;">
                                     @else
                                         <div class="bg-light border text-muted d-flex flex-column align-items-center justify-content-center rounded p-4 mx-auto" style="width: 200px; height: 200px;">
                                             <i class="fa-solid fa-image fa-3x mb-2"></i>

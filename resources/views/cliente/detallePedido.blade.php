@@ -47,7 +47,7 @@
                                     <!-- Imagen -->
                                     <td class="text-center px-4">
                                         @if($detalle->producto && $detalle->producto->imagen_url)
-                                            <img src="{{ asset($detalle->producto->imagen_url) }}" alt="Producto" class="img-thumbnail shadow-sm" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
+                                            <img src="{{ \App\Support\MediaStorage::resolveUrl($detalle->producto->imagen_url) }}" alt="Producto" class="img-thumbnail shadow-sm" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
                                         @else
                                             <div class="bg-light text-secondary shadow-sm d-flex align-items-center justify-content-center mx-auto" style="width: 60px; height: 60px; border-radius: 8px;">
                                                 <i class="fa-solid fa-image fs-4"></i>

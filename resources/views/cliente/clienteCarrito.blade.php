@@ -47,7 +47,7 @@
                                         <td class="px-4">
                                             <div class="d-flex align-items-center gap-3">
                                                 @if($item->producto->imagen_url)
-                                                    <img src="{{ asset($item->producto->imagen_url) }}" 
+                                                    <img src="{{ \App\Support\MediaStorage::resolveUrl($item->producto->imagen_url) }}" 
                                                     style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;" 
                                                     class="shadow-sm" 
                                                     alt="{{ $item->producto->nombre }}">

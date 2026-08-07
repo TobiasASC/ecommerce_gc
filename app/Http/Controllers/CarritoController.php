@@ -7,7 +7,7 @@ use App\Models\Pedido;
 use App\Models\MetodoPago;
 use App\Models\Producto;
 use Illuminate\Support\Facades\Auth;
-use Cloudinary\Cloudinary;
+use App\Support\MediaStorage;
 
 class CarritoController extends Controller
 {
@@ -193,16 +193,7 @@ class CarritoController extends Controller
     // --- LÓGICA PARA GUARDAR EL COMPROBANTE EN CLOUDINARY ---
     $comprobanteUrl = null;
     if ($request->hasFile('comprobante')) {
-        $cloudinary = new Cloudinary(env('CLOUDINARY_URL'));
-        $resultado = $cloudinary->uploadApi()->upload(
-            $request->file('comprobante')->getRealPath(),
-            [
-                'folder' => 'comprobantes',
-                'resource_type' => 'image',
-            ]
-        );
-
-        $comprobanteUrl = $resultado['secure_url'] ?? null;
+        $comprobanteUrl = MediaStorage::store($request->file('comprobante'), 'comprobantes');
     }
 
     // Actualizar el pedido

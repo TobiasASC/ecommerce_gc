@@ -85,7 +85,7 @@
                                 <tr>
                                     <td class="text-center">
                                         @if($producto->imagen_url)
-                                            <img src="{{ asset($producto->imagen_url) }}" alt="{{ $producto->nombre }}" class="img-thumbnail shadow-sm" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
+                                            <img src="{{ \App\Support\MediaStorage::resolveUrl($producto->imagen_url) }}" alt="{{ $producto->nombre }}" class="img-thumbnail shadow-sm" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
                                         @else
                                             <div class="bg-light text-secondary shadow-sm d-flex align-items-center justify-content-center mx-auto" style="width: 60px; height: 60px; border-radius: 8px;">
                                                 <i class="fa-solid fa-image fs-4"></i>
