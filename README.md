@@ -51,8 +51,8 @@ php artisan serve
   cliente@example.com
   12345678
 
-  - Admin
-    admin@example.com
-    12345678
+- Admin
+  admin@example.com
+  12345678
            
 <h4>Desarrollado por Tobias Sanchez Cueba 🚀</h4>
