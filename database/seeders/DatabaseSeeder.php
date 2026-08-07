@@ -16,7 +16,8 @@ class DatabaseSeeder extends Seeder
             categoriasProduccionSeeder::class,
             productosProduccionSeeder::class,
             metodoPagosProduccionSeeder::class,
-            usuariosProduccionSeeder::class,
+            UsuarioLocalSeeder::class,
+            //usuariosProduccionSeeder::class,
         ]);
     }
 }
