@@ -34,7 +34,7 @@ cp .env.example .env
 ```
 Generar key
 ```bash
-php artisan key: generate
+php artisan key:generate
 ```
 
 Paso 4 - Ejecutar migraciones y seeders
@@ -46,5 +46,13 @@ Paso 5 - Iniciar el servidor local
 ```bash
 php artisan serve
 ```
+**Usuarios**:
+- Cliente
+  cliente@example.com
+  12345678
 
+  - Admin
+    admin@example.com
+    12345678
+           
 <h4>Desarrollado por Tobias Sanchez Cueba 🚀</h4>
