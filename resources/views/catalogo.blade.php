@@ -36,7 +36,7 @@
                 </form>
 
 <!-- Barra de Categorías (Píldoras) -->
-<div class="d-flex gap-2 justify-content-center overflow-auto py-2" style="scrollbar-width: none; -ms-overflow-style: none;">
+<div class="d-flex gap-2 justify-content-start justify-content-md-center overflow-auto py-2 px-3" style="scrollbar-width: none; -ms-overflow-style: none;">
     <!-- Botón "Todas" -->
     <a href="{{ route('catalogo') }}" 
        class="btn btn-categoria-catalogo rounded-pill px-4 text-nowrap shadow-sm {{ !request()->route('id') ? 'bg-white fw-bold border-0' : 'btn-outline-light border-0' }}" 
