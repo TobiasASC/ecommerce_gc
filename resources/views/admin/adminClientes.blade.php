@@ -16,7 +16,7 @@
                     <div class="d-flex flex-column flex-xl-row justify-content-between align-items-xl-center mb-3 gap-3">
                         <div class="d-flex align-items-center gap-2">
                             <h3 class="card-title m-0 titulo">Usuarios</h3>
-                            <span class="pill-counter">{{ $clientes->total() }} clientes</span>
+                            <span class="pill-counter">{{ $clientes->total() }} usuarios</span>
                         </div>
                         
                         <!-- FORMULARIO DE BUSQUEDA Y FILTRO -->
