@@ -28,7 +28,7 @@
                 </p>
                 <p>
                     <i class="fa-brands fa-square-facebook"></i>
-                    @gc_diseños
+                    -
                 </p>
             </div>
         </div>
