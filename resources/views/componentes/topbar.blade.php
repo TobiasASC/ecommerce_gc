@@ -1,22 +1,22 @@
-<div class="container-fluid d-flex align-items-center justify-content-between diseño-topbar">
+<div class="container-fluid row align-items-center justify-content-between diseño-topbar">
     <!--logo en letras de la empresa-->
-        <div class="d-flex align-items-center">
-        <img src="/img/logo.PNG" class="logo">
+    <div class="col-4 col-md-2 d-flex align-items-center">
+        <img src="/img/logo.PNG" class="logo" style="max-width: 100px;">
     </div>
 
-        <!-- Barra de búsqueda -->
-        <div class="flex-grow-1 mx-4 d-flex justify-content-center">
-            <div class="position-relative" style="width: 100%; max-width: 400px;">
-                <form action="{{ route('productos.buscar') }}" method="GET" class="d-flex align-items-center position-relative">
-                    <i class="fa-solid fa-magnifying-glass position-absolute text-muted" style="left: 15px;"></i>
-                    <input type="text" id="buscador" name="query" class="form-control rounded-pill ps-5 py-2 border-0 shadow-sm" placeholder="Buscar productos..." aria-label="Buscar" autocomplete="off" style="background-color: #f8f9fa;">
-                </form>
-                <div id="sugerencias-container" class="position-absolute w-100 bg-white border-0 rounded shadow-lg mt-2" style="z-index: 1000; display: none; overflow: hidden;"></div>
-            </div>
+    <!-- Barra de búsqueda -->
+    <div class="col-12 col-md-6 d-flex justify-content-center order-3 order-md-2 my-2 my-md-0">
+        <div class="position-relative w-100" style="max-width: 400px;">
+            <form action="{{ route('productos.buscar') }}" method="GET" class="d-flex align-items-center position-relative">
+                <i class="fa-solid fa-magnifying-glass position-absolute text-muted" style="left: 15px;"></i>
+                <input type="text" id="buscador" name="query" class="form-control rounded-pill ps-5 py-2 border-0 shadow-sm" placeholder="Buscar productos..." aria-label="Buscar" autocomplete="off" style="background-color: #f8f9fa;">
+            </form>
+            <div id="sugerencias-container" class="position-absolute w-100 bg-white border-0 rounded shadow-lg mt-2" style="z-index: 9999; display: none; overflow: hidden;"></div>
         </div>
+    </div>
 
     <!--iconos-->
-    <div class="d-flex align-items-center gap-3 fs-3">
+    <div class="col-4 col-md-2 d-flex justify-content-end align-items-center gap-3 fs-3 order-2 order-md-3">
         @auth
             @if(Auth::user()->rol->nombre === 'admin')
                 <!-- Dropdown Admin -->
@@ -93,6 +93,17 @@
                             item.style.cursor = 'pointer';
                             item.style.textDecoration = 'none';
                             item.textContent = producto.nombre;
+                        
+                            // Efecto Hover
+                            item.addEventListener('mouseover', function() {
+                                this.style.backgroundColor = '#6f42c1';
+                                this.style.color = 'white';
+                            });
+                            item.addEventListener('mouseout', function() {
+                                this.style.backgroundColor = 'white';
+                                this.style.color = 'black';
+                            });
+                        
                             container.appendChild(item);
                         });
                         container.style.display = 'block';
