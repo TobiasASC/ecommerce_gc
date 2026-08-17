@@ -1,22 +1,29 @@
-<div class="container-fluid row align-items-center justify-content-between diseño-topbar">
-    <!--logo en letras de la empresa-->
-    <div class="col-4 col-md-2 d-flex align-items-center">
-        <img src="/img/logo.PNG" class="logo" style="max-width: 100px;">
-    </div>
-
-    <!-- Barra de búsqueda -->
-    <div class="col-12 col-md-6 d-flex justify-content-center order-3 order-md-2 my-2 my-md-0">
-        <div class="position-relative w-100" style="max-width: 400px;">
-            <form action="{{ route('productos.buscar') }}" method="GET" class="d-flex align-items-center position-relative">
-                <i class="fa-solid fa-magnifying-glass position-absolute text-muted" style="left: 15px;"></i>
-                <input type="text" id="buscador" name="query" class="form-control rounded-pill ps-5 py-2 border-0 shadow-sm" placeholder="Buscar productos..." aria-label="Buscar" autocomplete="off" style="background-color: #f8f9fa;">
-            </form>
-            <div id="sugerencias-container" class="position-absolute w-100 bg-white border-0 rounded shadow-lg mt-2" style="z-index: 9999; display: none; overflow: hidden;"></div>
+<div class="container-fluid diseño-topbar">
+    <div class="row align-items-center">
+        <!--logo en letras de la empresa-->
+        <div class="col-4 col-md-2 d-flex align-items-center">
+            <img src="/img/logo.PNG" class="logo" style="max-width: 100px;">
         </div>
-    </div>
 
-    <!--iconos-->
-    <div class="col-4 col-md-2 d-flex justify-content-end align-items-center gap-3 fs-3 order-2 order-md-3">
+                <!-- Barra de búsqueda -->
+        <div class="col-8 col-md-6 order-3 order-md-2 my-2 my-md-0 d-flex justify-content-center">
+            <!-- Botón Lupa para móvil -->
+            <button class="btn d-md-none fs-3 text-dark" id="btn-lupa-movil" type="button">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+            
+            <!-- Contenedor del buscador -->
+            <div id="contenedor-buscador" class="position-relative w-100 d-none d-md-block" style="max-width: 400px;">
+                <form action="{{ route('productos.buscar') }}" method="GET" class="d-flex align-items-center position-relative">
+                    <i class="fa-solid fa-magnifying-glass position-absolute text-muted" style="left: 15px;"></i>
+                    <input type="text" id="buscador" name="query" class="form-control rounded-pill ps-5 py-2 border-0 shadow-sm" placeholder="Buscar..." aria-label="Buscar" autocomplete="off" style="background-color: #f8f9fa;">
+                </form>
+                <div id="sugerencias-container" class="position-absolute w-100 bg-white border-0 rounded shadow-lg mt-2" style="z-index: 9999; display: none; overflow: hidden;"></div>
+            </div>
+        </div>
+
+        <!--iconos-->
+        <div class="col-4 col-md-2 offset-md-2 d-flex justify-content-end align-items-center gap-3 fs-3 order-2 order-md-3">
         @auth
             @if(Auth::user()->rol->nombre === 'admin')
                 <!-- Dropdown Admin -->
@@ -71,7 +78,14 @@
         @endauth
     </div>
 
-    <script>
+        <script>
+        // Toggle buscador en móvil
+        document.getElementById('btn-lupa-movil').addEventListener('click', function() {
+            const container = document.getElementById('contenedor-buscador');
+            container.classList.toggle('d-none');
+            container.classList.toggle('d-block');
+        });
+
         document.getElementById('buscador').addEventListener('input', function() {
             let query = this.value;
             let container = document.getElementById('sugerencias-container');
@@ -115,7 +129,11 @@
 
         // Ocultar al hacer clic fuera
         document.addEventListener('click', function(e) {
-            if (!document.getElementById('buscador').contains(e.target)) {
+            const container = document.getElementById('contenedor-buscador');
+            const buscador = document.getElementById('buscador');
+            const btnLupa = document.getElementById('btn-lupa-movil');
+            
+            if (!buscador.contains(e.target) && !btnLupa.contains(e.target)) {
                 document.getElementById('sugerencias-container').style.display = 'none';
             }
         });
