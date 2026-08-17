@@ -1,141 +1,154 @@
-<div class="container-fluid diseño-topbar">
+<div class="container-fluid diseño-topbar py-2">
     <div class="row align-items-center">
-        <!--logo en letras de la empresa-->
-        <div class="col-4 col-md-2 d-flex align-items-center">
-            <img src="/img/logo.PNG" class="logo" style="max-width: 100px;">
+        
+        <!-- Izquierda: Logo (3 columnas en PC, 4 en móvil) -->
+        <div class="col-4 col-md-3 d-flex align-items-center">
+            <img src="/img/logo.PNG" class="logo" style="max-width: 90px;" alt="Logo Graciela Cueba">
         </div>
 
-                <!-- Barra de búsqueda -->
-        <div class="col-8 col-md-6 order-3 order-md-2 my-2 my-md-0 d-flex justify-content-center">
-            <!-- Botón Lupa para móvil -->
-            <button class="btn d-md-none fs-3 text-dark" id="btn-lupa-movil" type="button">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </button>
-            
-            <!-- Contenedor del buscador -->
-            <div id="contenedor-buscador" class="position-relative w-100 d-none d-md-block" style="max-width: 400px;">
-                <form action="{{ route('productos.buscar') }}" method="GET" class="d-flex align-items-center position-relative">
-                    <i class="fa-solid fa-magnifying-glass position-absolute text-muted" style="left: 15px;"></i>
-                    <input type="text" id="buscador" name="query" class="form-control rounded-pill ps-5 py-2 border-0 shadow-sm" placeholder="Buscar..." aria-label="Buscar" autocomplete="off" style="background-color: #f8f9fa;">
+        <!-- Centro: Buscador (6 columnas en PC, 12 en móvil al final de la fila) -->
+        <div class="col-12 col-md-6 order-3 order-md-2 mt-3 mt-md-0 d-none d-md-flex justify-content-center" id="wrapper-buscador">
+            <div id="contenedor-buscador" class="position-relative w-100" style="max-width: 500px;">
+                <form action="{{ route('productos.buscar') }}" method="GET" class="w-100 d-flex align-items-center position-relative">
+                    <i class="fa-solid fa-magnifying-glass position-absolute text-muted" style="left: 15px; z-index: 10;"></i>
+                    <input type="text" id="buscador" name="query" class="form-control rounded-pill ps-5 py-2 border-0 shadow-sm w-100" placeholder="Buscar..." aria-label="Buscar" autocomplete="off" style="background-color: #f8f9fa;">
                 </form>
-                <div id="sugerencias-container" class="position-absolute w-100 bg-white border-0 rounded shadow-lg mt-2" style="z-index: 9999; display: none; overflow: hidden;"></div>
+                
+                <!-- Contenedor de Sugerencias (Absoluto y forzado hacia abajo) -->
+                <div id="sugerencias-container" class="position-absolute w-100 bg-white border border-light rounded shadow-lg mt-1" style="z-index: 1050; display: none; top: 100%; left: 0; max-height: 300px; overflow-y: auto;"></div>
             </div>
         </div>
 
-        <!--iconos-->
-        <div class="col-4 col-md-2 offset-md-2 d-flex justify-content-end align-items-center gap-3 fs-3 order-2 order-md-3">
-        @auth
-            @if(Auth::user()->rol->nombre === 'admin')
-                <!-- Dropdown Admin -->
-                <div class="dropdown">
-                    <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" class="text-decoration-none">
-                        <i class="fa-solid fa-circle-user color-iconos-topbar"></i>
+        <!-- Derecha: Iconos (3 columnas en PC, 8 en móvil) -->
+        <div class="col-8 col-md-3 order-2 order-md-3 d-flex justify-content-end align-items-center gap-3 fs-3">
+            
+            <!-- Botón Lupa exclusivo para móvil (alineado a la derecha con los iconos) -->
+            <button class="btn d-md-none fs-4 text-light p-0" id="btn-lupa-movil" type="button">
+                <i class="fa-solid fa-magnifying-glass color-iconos-topbar"></i>
+            </button>
+
+            @auth
+                @if(Auth::user()->rol->nombre === 'admin')
+                    <!-- Dropdown Admin -->
+                    <div class="dropdown">
+                        <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" class="text-decoration-none">
+                            <i class="fa-solid fa-circle-user color-iconos-topbar"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end fs-6 shadow">
+                            <li><a class="dropdown-item" href="{{ route('admin.clientes') }}">Gestionar</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <form action="/logout" method="POST" class="m-0 p-0">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item">Cerrar sesión</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                @else
+                    <!-- Ícono carrito (solo cliente) -->
+                    <a href="{{ route('carrito.mostrar') }}">
+                        <i class="fa-solid fa-cart-shopping color-iconos-topbar"></i>
                     </a>
-                    
-                    <ul class="dropdown-menu dropdown-menu-end fs-6">
-                        <li><a class="dropdown-item" href="{{ route('admin.clientes') }}">Gestionar</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li>
-                            <form action="/logout" method="POST" class="m-0 p-0">
-                                @csrf
-                                <button type="submit" class="dropdown-item">Cerrar sesión</button>
-                            </form>
-                        </li>
-                    </ul>
-                </div>
-                
+
+                    <!-- Dropdown Cliente -->
+                    <div class="dropdown">
+                        <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" class="text-decoration-none">
+                            <i class="fa-solid fa-circle-user color-iconos-topbar"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end fs-6 shadow">
+                            <li><a class="dropdown-item" href="{{ route('cliente.cuenta') }}">Mi perfil</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <form action="/logout" method="POST" class="m-0 p-0">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item">Cerrar sesión</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                @endif
             @else
-                
-                <!-- Ícono carrito (solo cliente) -->
-                <a href="{{ route('carrito.mostrar') }}"><i class="fa-solid fa-cart-shopping color-iconos-topbar"></i></a>
-
-                <!-- Dropdown Cliente -->
-                <div class="dropdown">
-                    <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" class="text-decoration-none">
-                        <i class="fa-solid fa-circle-user color-iconos-topbar"></i>
-                    </a>
-                    
-                    <ul class="dropdown-menu dropdown-menu-end fs-6">
-                        <li><a class="dropdown-item" href="{{ route('cliente.cuenta') }}">Mi perfil</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li>
-                            <form action="/logout" method="POST" class="m-0 p-0">
-                                @csrf
-                                <button type="submit" class="dropdown-item">Cerrar sesión</button>
-                            </form>
-                        </li>
-                    </ul>
-                </div>
-                
-            @endif
-
-        @else
-            <!-- Invitado (Sin dropdown, te lleva directo al login) -->
-            <a href="/login">
-                <i class="fa-solid fa-circle-user color-iconos-topbar"></i>
-            </a>
-            
-        @endauth
+                <!-- Invitado -->
+                <a href="/login">
+                    <i class="fa-solid fa-circle-user color-iconos-topbar"></i>
+                </a>
+            @endauth
+        </div>
+        
     </div>
+</div>
 
-        <script>
-        // Toggle buscador en móvil
-        document.getElementById('btn-lupa-movil').addEventListener('click', function() {
-            const container = document.getElementById('contenedor-buscador');
-            container.classList.toggle('d-none');
-            container.classList.toggle('d-block');
-        });
+<script>
+    // Toggle buscador en móvil
+    document.getElementById('btn-lupa-movil').addEventListener('click', function() {
+        const wrapper = document.getElementById('wrapper-buscador');
+        wrapper.classList.toggle('d-none');
+        wrapper.classList.toggle('d-flex');
+    });
 
-        document.getElementById('buscador').addEventListener('input', function() {
-            let query = this.value;
-            let container = document.getElementById('sugerencias-container');
+    // Petición AJAX para sugerencias
+    document.getElementById('buscador').addEventListener('input', function() {
+        let query = this.value;
+        let container = document.getElementById('sugerencias-container');
 
-            if (query.length < 2) {
-                container.style.display = 'none';
-                return;
-            }
+        if (query.length < 2) {
+            container.style.display = 'none';
+            return;
+        }
 
-            fetch(`{{ route('productos.sugerencias') }}?query=${query}`)
-                .then(response => response.json())
-                .then(data => {
-                    container.innerHTML = '';
-                    if (data.length > 0) {
-                        data.forEach(producto => {
-                            let item = document.createElement('a');
-                            item.href = `/producto/${producto.id}`;
-                            item.className = 'dropdown-item p-3 text-dark border-bottom';
-                            item.style.cursor = 'pointer';
-                            item.style.textDecoration = 'none';
-                            item.textContent = producto.nombre;
-                        
-                            // Efecto Hover
-                            item.addEventListener('mouseover', function() {
-                                this.style.backgroundColor = '#6f42c1';
-                                this.style.color = 'white';
-                            });
-                            item.addEventListener('mouseout', function() {
-                                this.style.backgroundColor = 'white';
-                                this.style.color = 'black';
-                            });
-                        
-                            container.appendChild(item);
+        fetch(`{{ route('productos.sugerencias') }}?query=${query}`)
+            .then(response => response.json())
+            .then(data => {
+                container.innerHTML = '';
+                if (data.length > 0) {
+                    data.forEach(producto => {
+                        let item = document.createElement('a');
+                        item.href = `/producto/${producto.id}`;
+                        item.className = 'dropdown-item p-3 text-dark border-bottom d-block';
+                        item.style.cursor = 'pointer';
+                        item.style.textDecoration = 'none';
+                        item.textContent = producto.nombre;
+                    
+                        // Efecto Hover
+                        item.addEventListener('mouseover', function() {
+                            this.style.backgroundColor = '#6f42c1'; // El violeta de Bootstrap
+                            this.style.color = 'white';
                         });
-                        container.style.display = 'block';
-                    } else {
-                        container.style.display = 'none';
-                    }
-                });
-        });
+                        item.addEventListener('mouseout', function() {
+                            this.style.backgroundColor = 'white';
+                            this.style.color = 'black';
+                        });
+                    
+                        container.appendChild(item);
+                    });
+                    container.style.display = 'block';
+                } else {
+                    container.style.display = 'none';
+                }
+            })
+            .catch(error => {
+                console.error("Error al buscar productos:", error);
+                container.style.display = 'none';
+            });
+    });
 
-        // Ocultar al hacer clic fuera
-        document.addEventListener('click', function(e) {
-            const container = document.getElementById('contenedor-buscador');
-            const buscador = document.getElementById('buscador');
-            const btnLupa = document.getElementById('btn-lupa-movil');
-            
-            if (!buscador.contains(e.target) && !btnLupa.contains(e.target)) {
-                document.getElementById('sugerencias-container').style.display = 'none';
+    // Ocultar al hacer clic fuera del buscador
+    document.addEventListener('click', function(e) {
+        const wrapper = document.getElementById('wrapper-buscador');
+        const buscador = document.getElementById('buscador');
+        const btnLupa = document.getElementById('btn-lupa-movil');
+        const container = document.getElementById('sugerencias-container');
+        
+        // Si el clic no fue en el input de búsqueda ni en el botón de lupa
+        if (!buscador.contains(e.target) && !btnLupa.contains(e.target)) {
+            container.style.display = 'none';
+            // En móvil, puedes querer ocultar toda la barra si hacen clic fuera
+            if (window.innerWidth < 768 && !wrapper.contains(e.target)) {
+                 wrapper.classList.add('d-none');
+                 wrapper.classList.remove('d-flex');
             }
-        });
-    </script>
+        }
+    });
+</script>
 </div>
