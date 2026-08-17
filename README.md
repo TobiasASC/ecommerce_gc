@@ -36,12 +36,19 @@ Generar key
 ```bash
 php artisan key:generate
 ```
-
+Configurar .env para conectar la BD local.
+```bash
+DB_CONNECTION=mariadb
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=ecommerce_gc
+DB_USERNAME=tu_usuario
+DB_PASSWORD=tu_contraseña
+```
 Paso 4 - Ejecutar migraciones y seeders
 ```bash
 php artisan migrate --seed
 ```
-
 Paso 5 - Iniciar el servidor local
 ```bash
 php artisan serve
