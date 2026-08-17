@@ -824,6 +824,7 @@ footer a {
 }
 
 .body-autenticacion{
+  margin: 0;
   min-height: 100vh;
   background-color: var(--purple-deep);
   background-image: radial-gradient(circle at top left, rgba(233, 205, 250, 0.18), transparent 24%),
