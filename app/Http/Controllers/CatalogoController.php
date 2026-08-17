@@ -65,5 +65,25 @@ class CatalogoController extends Controller
         ));
     }
 
-    
+    public function buscar(Request $request)
+    {
+        $query = $request->input('query');
+        $productos = Producto::where('nombre', 'like', '%' . $query . '%')
+            ->where('activo', true)
+            ->get();
+        $categorias = Categoria::where('activo', true)->get();
+
+        return view('catalogo', compact('productos', 'categorias'));
+    }
+
+    public function sugerencias(Request $request)
+    {
+        $query = $request->input('query');
+        $productos = Producto::where('nombre', 'like', '%' . $query . '%')
+            ->where('activo', true)
+            ->limit(5)
+            ->get(['id', 'nombre']);
+
+        return response()->json($productos);
+    }
 }

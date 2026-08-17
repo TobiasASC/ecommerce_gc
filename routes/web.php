@@ -40,6 +40,9 @@ Route::post('/register', [AuthController::class, 'registrar'])->name('register.p
 // Devuelve el catalogo con todos los productos y categorias
 Route::get('/catalogo', [CatalogoController::class, 'index'])->name('catalogo');
 
+Route::get('/productos/buscar', [CatalogoController::class, 'buscar'])->name('productos.buscar');
+Route::get('/productos/sugerencias', [CatalogoController::class, 'sugerencias'])->name('productos.sugerencias');
+
 Route::get('/categorias/{id}', [CatalogoController::class, 'categoria'])->name('catalogo.categoria');
 
 Route::get('/producto/{id}', [CatalogoController::class, 'mostrarEspecifico'])->name('producto.mostrar');
