@@ -5,12 +5,15 @@
     </div>
 
         <!-- Barra de búsqueda -->
-    <div class="flex-grow-1 mx-4 position-relative">
-        <form action="{{ route('productos.buscar') }}" method="GET" class="d-flex">
-            <input type="text" id="buscador" name="query" class="form-control rounded-pill" placeholder="Buscar productos..." aria-label="Buscar" autocomplete="off">
-        </form>
-        <div id="sugerencias-container" class="position-absolute w-100 bg-white border rounded shadow mt-1" style="z-index: 1000; display: none;"></div>
-    </div>
+        <div class="flex-grow-1 mx-4 d-flex justify-content-center">
+            <div class="position-relative" style="width: 100%; max-width: 400px;">
+                <form action="{{ route('productos.buscar') }}" method="GET" class="d-flex align-items-center position-relative">
+                    <i class="fa-solid fa-magnifying-glass position-absolute text-muted" style="left: 15px;"></i>
+                    <input type="text" id="buscador" name="query" class="form-control rounded-pill ps-5 py-2 border-0 shadow-sm" placeholder="Buscar productos..." aria-label="Buscar" autocomplete="off" style="background-color: #f8f9fa;">
+                </form>
+                <div id="sugerencias-container" class="position-absolute w-100 bg-white border-0 rounded shadow-lg mt-2" style="z-index: 1000; display: none; overflow: hidden;"></div>
+            </div>
+        </div>
 
     <!--iconos-->
     <div class="d-flex align-items-center gap-3 fs-3">
@@ -86,7 +89,9 @@
                         data.forEach(producto => {
                             let item = document.createElement('a');
                             item.href = `/producto/${producto.id}`;
-                            item.className = 'dropdown-item text-decoration-none p-2';
+                            item.className = 'dropdown-item p-3 text-dark border-bottom';
+                            item.style.cursor = 'pointer';
+                            item.style.textDecoration = 'none';
                             item.textContent = producto.nombre;
                             container.appendChild(item);
                         });
