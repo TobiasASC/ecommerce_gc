@@ -136,7 +136,7 @@
         
         // Verificamos que los elementos existan antes de usar .contains para evitar errores en otras páginas
         if (buscador && btnLupa && container) {
-            if (!buscador.contains(e.target) && !btnLupa.contains(e.target)) {
+            if (!buscador.contains(e.target) && !btnLupa.contains(e.target) && !container.contains(e.target)) {
                 container.style.display = 'none';
                 if (window.innerWidth < 768 && wrapper && !wrapper.contains(e.target)) {
                      wrapper.classList.add('d-none');
