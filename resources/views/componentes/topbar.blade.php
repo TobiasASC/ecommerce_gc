@@ -88,9 +88,11 @@
     });
 
     // Petición AJAX para sugerencias
-    document.getElementById('buscador').addEventListener('input', function() {
+    // CORRECCIÓN 1: 'buscador-topbar'
+    document.getElementById('buscador-topbar').addEventListener('input', function() {
         let query = this.value;
-        let container = document.getElementById('sugerencias-container');
+        // CORRECCIÓN 2: 'sugerencias-container-topbar'
+        let container = document.getElementById('sugerencias-container-topbar');
 
         if (query.length < 2) {
             container.style.display = 'none';
@@ -105,14 +107,10 @@
                     data.forEach(producto => {
                         let item = document.createElement('a');
                         item.href = `/producto/${producto.id}`;
-                        // ¡NUEVO!: Se agregó la clase 'sugerencia-item' para el CSS
                         item.className = 'dropdown-item p-3 text-dark border-bottom d-block sugerencia-item';
                         item.style.cursor = 'pointer';
                         item.style.textDecoration = 'none';
                         item.textContent = producto.nombre;
-                        
-                        // Los eventos mouseover y mouseout fueron eliminados. 
-                        // Ahora el hover se controla 100% desde el CSS.
 
                         container.appendChild(item);
                     });
@@ -130,16 +128,20 @@
     // Ocultar al hacer clic fuera del buscador
     document.addEventListener('click', function(e) {
         const wrapper = document.getElementById('wrapper-buscador');
-        // NOTA: Asegúrate de que este ID coincida con tu HTML real (buscador o buscador-topbar)
-        const buscador = document.getElementById('buscador'); 
-        const btnLupa = document.getElementById('btn-lupa-movil');
-        const container = document.getElementById('sugerencias-container');
         
-        if (!buscador.contains(e.target) && !btnLupa.contains(e.target)) {
-            container.style.display = 'none';
-            if (window.innerWidth < 768 && !wrapper.contains(e.target)) {
-                 wrapper.classList.add('d-none');
-                 wrapper.classList.remove('d-flex');
+        // CORRECCIÓN 3 y 4: IDs actualizados
+        const buscador = document.getElementById('buscador-topbar'); 
+        const btnLupa = document.getElementById('btn-lupa-movil');
+        const container = document.getElementById('sugerencias-container-topbar');
+        
+        // Verificamos que los elementos existan antes de usar .contains para evitar errores en otras páginas
+        if (buscador && btnLupa && container) {
+            if (!buscador.contains(e.target) && !btnLupa.contains(e.target)) {
+                container.style.display = 'none';
+                if (window.innerWidth < 768 && wrapper && !wrapper.contains(e.target)) {
+                     wrapper.classList.add('d-none');
+                     wrapper.classList.remove('d-flex');
+                }
             }
         }
     });
