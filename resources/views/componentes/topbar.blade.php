@@ -11,11 +11,11 @@
             <div id="contenedor-buscador" class="position-relative w-100" style="max-width: 500px;">
                 <form action="{{ route('productos.buscar') }}" method="GET" class="w-100 d-flex align-items-center position-relative">
                     <i class="fa-solid fa-magnifying-glass position-absolute text-muted" style="left: 15px; z-index: 10;"></i>
-                    <input type="text" id="buscador" name="query" class="form-control rounded-pill ps-5 py-2 border-0 shadow-sm w-100" placeholder="Buscar..." aria-label="Buscar" autocomplete="off" style="background-color: #f8f9fa;">
+                    <input type="text" id="buscador-topbar" name="query" class="form-control rounded-pill ps-5 py-2 border-0 shadow-sm w-100" placeholder="Buscar..." aria-label="Buscar" autocomplete="off" style="background-color: #f8f9fa;">
                 </form>
                 
                 <!-- Contenedor de Sugerencias (Absoluto y forzado hacia abajo) -->
-                <div id="sugerencias-container" class="position-absolute w-100 bg-white border border-light rounded shadow-lg mt-1" style="z-index: 1050; display: none; top: 100%; left: 0; max-height: 300px; overflow-y: auto;"></div>
+                <div id="sugerencias-container-topbar" class="position-absolute w-100 bg-white border border-light rounded shadow-lg mt-1" style="z-index: 1050; display: none; top: 100%; left: 0; max-height: 300px; overflow-y: auto;"></div>
             </div>
         </div>
 
@@ -105,21 +105,15 @@
                     data.forEach(producto => {
                         let item = document.createElement('a');
                         item.href = `/producto/${producto.id}`;
-                        item.className = 'dropdown-item p-3 text-dark border-bottom d-block';
+                        // ¡NUEVO!: Se agregó la clase 'sugerencia-item' para el CSS
+                        item.className = 'dropdown-item p-3 text-dark border-bottom d-block sugerencia-item';
                         item.style.cursor = 'pointer';
                         item.style.textDecoration = 'none';
                         item.textContent = producto.nombre;
-                    
-                        // Efecto Hover
-                        item.addEventListener('mouseover', function() {
-                            this.style.backgroundColor = '#6f42c1'; // El violeta de Bootstrap
-                            this.style.color = 'white';
-                        });
-                        item.addEventListener('mouseout', function() {
-                            this.style.backgroundColor = 'white';
-                            this.style.color = 'black';
-                        });
-                    
+                        
+                        // Los eventos mouseover y mouseout fueron eliminados. 
+                        // Ahora el hover se controla 100% desde el CSS.
+
                         container.appendChild(item);
                     });
                     container.style.display = 'block';
@@ -136,14 +130,13 @@
     // Ocultar al hacer clic fuera del buscador
     document.addEventListener('click', function(e) {
         const wrapper = document.getElementById('wrapper-buscador');
-        const buscador = document.getElementById('buscador');
+        // NOTA: Asegúrate de que este ID coincida con tu HTML real (buscador o buscador-topbar)
+        const buscador = document.getElementById('buscador'); 
         const btnLupa = document.getElementById('btn-lupa-movil');
         const container = document.getElementById('sugerencias-container');
         
-        // Si el clic no fue en el input de búsqueda ni en el botón de lupa
         if (!buscador.contains(e.target) && !btnLupa.contains(e.target)) {
             container.style.display = 'none';
-            // En móvil, puedes querer ocultar toda la barra si hacen clic fuera
             if (window.innerWidth < 768 && !wrapper.contains(e.target)) {
                  wrapper.classList.add('d-none');
                  wrapper.classList.remove('d-flex');

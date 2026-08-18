@@ -979,6 +979,34 @@ footer a {
     display: block;
 }
 
+#buscador:hover, 
+#buscador:focus,
+#buscador-topbar:hover, 
+#buscador-topbar:focus {
+    background-color: var(--rosa) !important;
+    color: var(--morado_oscuro);
+    outline: none;
+    /* Una sombra suave con el mismo tono rosa para que resalte elegante al escribir */
+    box-shadow: 0 0 0 0.25rem rgba(231, 203, 233, 0.6) !important; 
+}
+
+/* Evita que el ícono de la lupa quede oculto o sin contraste */
+#buscador:focus + i,
+#buscador-topbar:focus + i {
+    color: var(--morado_oscuro) !important;
+}
+
+/* 2. Hover para los enlaces de sugerencias */
+.sugerencia-item {
+    transition: background-color 0.2s ease, color 0.2s ease, font-weight 0.2s ease;
+}
+
+.sugerencia-item:hover {
+    background-color: var(--rosa) !important;
+    color: var(--morado_oscuro) !important; 
+    font-weight: 600; /* Lo hace levemente más gordito para resaltar la selección */
+}
+
 /*===========Sidebar===========*/
 .activo{
   background-color: var(--morado_oscuro) !important;
