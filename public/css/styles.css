@@ -293,6 +293,9 @@ background-color: #8c53bb;
 background-image: url("https://www.transparenttextures.com/patterns/dark-wood.png");
 
 padding: 10px 50px;
+
+position: relative;
+z-index: 9999; 
 }
 
 .logo{
@@ -322,10 +325,6 @@ padding: 10px 50px;
     transition: transform 0.18s ease, opacity 0.18s ease;
 }
 
-.diseño-topbar {
-    position: relative;
-    z-index: 9999; 
-}
 
 .diseño-topbar .dropdown-menu.show {
     transform: translateY(6px);
