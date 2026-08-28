@@ -37,10 +37,12 @@
           {{ $errors->first() }}
         </div>
       @endif
-
+ 
+      <!--
       <p class="mt-3">
         ¿No tenés una cuenta? <a href="/register">Registrate acá</a>
       </p>
+      -->
 
       <div class="d-grid">
         <button type="submit" class="btn btn-autenticar">

@@ -3,7 +3,7 @@
         
         <!-- Izquierda: Logo (3 columnas en PC, 4 en móvil) -->
         <div class="col-4 col-md-3 d-flex align-items-center">
-            <img src="/img/logo.PNG" class="logo" style="max-width: 90px;" alt="Logo Graciela Cueba">
+            <img src="/img/logo.PNG" class="logo" style="max-width: 90px;" alt="Logo GC">
         </div>
 
         <!-- Centro: Buscador (6 columnas en PC, 12 en móvil al final de la fila) -->

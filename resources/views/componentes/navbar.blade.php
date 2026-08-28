@@ -8,7 +8,7 @@
             <div class="navbar-nav fw-bold">
                 <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" aria-current="page" href="/">INICIO</a>
                 <a class="nav-link {{ request()->is('catalogo') || request()->is('categorias/*')? 'active' : '' }}" href="/catalogo">CATÁLOGO</a>
-                <a class="nav-link {{ request()->is('contacto') ? 'active' : '' }}" href="{{ route('inicio') }}#categorias">DESTACADOS</a>
+                <a class="nav-link {{ request()->is('contacto') ? 'active' : '' }}" href="{{ route('inicio') }}#destacados">DESTACADOS</a>
                 <a class="nav-link {{ request()->is('contacto') ? 'active' : '' }}" href="{{ route('inicio') }}#contacto">CONTACTO</a>
             </div>
         </div>
