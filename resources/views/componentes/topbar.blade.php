@@ -19,61 +19,21 @@
             </div>
         </div>
 
-        <!-- Derecha: Iconos (3 columnas en PC, 8 en móvil) -->
-        <div class="col-8 col-md-3 order-2 order-md-3 d-flex justify-content-end align-items-center gap-3 fs-3">
+        <!-- Derecha: búsqueda y consulta -->
+        <div class="col-8 col-md-3 order-2 order-md-3 d-flex justify-content-end align-items-center gap-3">
             
             <!-- Botón Lupa exclusivo para móvil (alineado a la derecha con los iconos) -->
             <button class="btn d-md-none fs-4 text-light p-0" id="btn-lupa-movil" type="button">
                 <i class="fa-solid fa-magnifying-glass color-iconos-topbar"></i>
             </button>
 
-            @auth
-                @if(Auth::user()->rol->nombre === 'admin')
-                    <!-- Dropdown Admin -->
-                    <div class="dropdown">
-                        <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" class="text-decoration-none">
-                            <i class="fa-solid fa-circle-user color-iconos-topbar"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end fs-6 shadow">
-                            <li><a class="dropdown-item" href="{{ route('admin.clientes') }}">Gestionar</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li>
-                                <form action="/logout" method="POST" class="m-0 p-0">
-                                    @csrf
-                                    <button type="submit" class="dropdown-item">Cerrar sesión</button>
-                                </form>
-                            </li>
-                        </ul>
-                    </div>
-                @else
-                    <!-- Ícono carrito (solo cliente) -->
-                    <a href="{{ route('carrito.mostrar') }}">
-                        <i class="fa-solid fa-cart-shopping color-iconos-topbar"></i>
-                    </a>
-
-                    <!-- Dropdown Cliente -->
-                    <div class="dropdown">
-                        <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" class="text-decoration-none">
-                            <i class="fa-solid fa-circle-user color-iconos-topbar"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end fs-6 shadow">
-                            <li><a class="dropdown-item" href="{{ route('cliente.cuenta') }}">Mi perfil</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li>
-                                <form action="/logout" method="POST" class="m-0 p-0">
-                                    @csrf
-                                    <button type="submit" class="dropdown-item">Cerrar sesión</button>
-                                </form>
-                            </li>
-                        </ul>
-                    </div>
-                @endif
-            @else
-                <!-- Invitado -->
-                <a href="/login">
-                    <i class="fa-solid fa-circle-user color-iconos-topbar"></i>
-                </a>
-            @endauth
+            @php($whatsappNumber = config('services.whatsapp_number'))
+            <a href="{{ $whatsappNumber ? 'https://wa.me/' . preg_replace('/[^0-9]/', '', $whatsappNumber) : '#' }}"
+               class="btn btn-success rounded-pill fw-bold text-nowrap"
+               target="_blank" rel="noopener"
+               @if(!$whatsappNumber) aria-disabled="true" @endif>
+                <i class="fa-brands fa-whatsapp me-1"></i> Consultar
+            </a>
         </div>
         
     </div>

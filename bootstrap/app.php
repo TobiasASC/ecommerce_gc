@@ -15,10 +15,6 @@ return Application::configure(basePath: dirname(__DIR__))
     // Añadimos la confianza en todos los proxies (Ideal para Vercel)
         $middleware->trustProxies(at: '*');
 
-    $middleware->alias([
-        'admin' => \App\Http\Middleware\AdminMiddleware::class,
-        'cliente' => \App\Http\Middleware\ClienteMiddleware::class,
-    ]);
 })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(
