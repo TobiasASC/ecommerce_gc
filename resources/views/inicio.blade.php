@@ -188,7 +188,8 @@
                     </div>
                     <h4 class="fw-bold">WhatsApp</h4>
                     <p class="text-muted mb-4">-</p>
-                    <a href="#" class="btn btn-outline-success rounded-pill mt-auto fw-bold">Enviar mensaje</a>
+                    @php($whatsappNumber = config('services.whatsapp_number'))
+                    <a href="{{ $whatsappNumber ? 'https://wa.me/' . preg_replace('/[^0-9]/', '', $whatsappNumber) . '?text=' . urlencode('Hola, quiero realizar una consulta') : '#' }}" class="btn btn-outline-success rounded-pill mt-auto fw-bold" target="_blank" rel="noopener" @if(!$whatsappNumber) aria-disabled="true" @endif>Enviar mensaje</a>
                 </div>
             </div>
 

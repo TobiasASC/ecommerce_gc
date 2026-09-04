@@ -40,6 +40,10 @@
                             <span class="text-danger fw-bold small mb-2 d-block"><i class="fa-solid fa-circle-xmark me-1"></i> Sin Stock</span>
                         @endif
                         <div class="d-grid gap-2">
+                            @php($whatsappNumber = config('services.whatsapp_number'))
+                            <a href="{{ $whatsappNumber ? 'https://wa.me/' . preg_replace('/[^0-9]/', '', $whatsappNumber) . '?text=' . urlencode('Hola, quiero consultar por ' . $producto->nombre) : '#' }}" class="btn boton-detalle rounded-pill" target="_blank" rel="noopener" @if(!$whatsappNumber) aria-disabled="true" @endif>
+                                <i class="fa-brands fa-whatsapp me-1"></i> Consultar
+                            </a>
                             <a href="{{ route('producto.mostrar', $producto->id) }}" class="btn boton-detalle rounded-pill">Ver detalles</a>
                         </div>
                     </div>
