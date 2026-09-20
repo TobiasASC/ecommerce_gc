@@ -9,7 +9,7 @@
         <!-- Centro: Buscador (6 columnas en PC, 12 en móvil al final de la fila) -->
         <div class="col-12 col-md-6 order-3 order-md-2 mt-3 mt-md-0 d-none d-md-flex justify-content-center" id="wrapper-buscador">
             <div id="contenedor-buscador" class="position-relative w-100" style="max-width: 500px;">
-                <form action="{{ route('productos.buscar') }}" method="GET" class="w-100 d-flex align-items-center position-relative">
+                <form action="{{ url('/productos/buscar') }}" method="GET" class="w-100 d-flex align-items-center position-relative">
                     <i class="fa-solid fa-magnifying-glass position-absolute text-muted" style="left: 15px; z-index: 10;"></i>
                     <input type="text" id="buscador-topbar" name="query" class="form-control rounded-pill ps-5 py-2 border-0 shadow-sm w-100" placeholder="Buscar..." aria-label="Buscar" autocomplete="off" style="background-color: #f8f9fa;">
                 </form>

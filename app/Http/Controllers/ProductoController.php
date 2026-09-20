@@ -77,7 +77,8 @@ class ProductoController extends Controller
             'stock_actual' => 'required|integer|min:0',
             'stock_minimo' => 'required|integer|min:0',
             'categoria_id' => 'required|exists:categorias,id',
-            'imagen'       => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048'
+            'imagen'       => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'descripcion'  => 'nullable|string'
         ]);
 
         $producto = Producto::findOrFail($id);
@@ -99,7 +100,7 @@ class ProductoController extends Controller
         // Actualizamos los datos en la base de datos
         $producto->update([
             'nombre'       => $request->nombre,
-            'descripcion'  => $request->descripcion,
+            'descripcion'  => $request->input('descripcion') ?? '',
             'precio_venta' => $request->precio_venta,
             'stock_actual' => $request->stock_actual,
             'stock_minimo' => $request->stock_minimo,
@@ -138,7 +139,8 @@ class ProductoController extends Controller
 
             'categoria_id' => 'required|exists:categorias,id',
 
-            'imagen' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048'
+            'imagen' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'descripcion' => 'nullable|string'
         ]);
 
         $rutaImagen = null;
@@ -151,7 +153,7 @@ class ProductoController extends Controller
 
             'nombre' => $request->nombre,
 
-            'descripcion' => $request->descripcion,
+            'descripcion' => $request->input('descripcion') ?? '',
 
             'precio_venta' => $request->precio_venta,
 
