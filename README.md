@@ -2,11 +2,11 @@
 
 Un catálogo digital y plataforma de e-commerce autogestionable desarrollado para mostrar productos de diseño, controlar stock y gestionar categorías de forma dinámica.
 
-<img width="1905" height="903" alt="image" src="![Uploading image.png…]()
-" />
+<img width="1906" height="911" alt="Captura de pantalla 2026-09-23 202838" src="https://github.com/user-attachments/assets/8c203d14-bb8b-4271-81a3-2dfffaf2bc2a" />
 
 
-##  Características principales (Features)
+
+##  Características principales
 
 *   **Catálogo Público:** Vista optimizada de productos con imágenes alojadas en la nube.
 *   **Gestión de Datos:** Uso de migraciones y seeders para la carga inicial estructurada de productos y usuarios.
