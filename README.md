@@ -2,7 +2,8 @@
 
 Un catálogo digital y plataforma de e-commerce autogestionable desarrollado para mostrar productos de diseño, controlar stock y gestionar categorías de forma dinámica.
 
-<img width="1905" height="903" alt="image" src="https://github.com/user-attachments/assets/dc740f4f-bd46-4339-9326-3cc0d1cba072" />
+<img width="1905" height="903" alt="image" src="![Uploading image.png…]()
+" />
 
 
 ##  Características principales (Features)
