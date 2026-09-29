@@ -63,4 +63,4 @@ php artisan serve
   admin@example.com
   12345678
            
-<h4>Desarrollado por Tobias Sanchez Cueba 🚀</h4>
+<h4>Desarrollado por Tobias Sanchez Cueba </h4>
