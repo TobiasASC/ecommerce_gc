@@ -1,5 +1,5 @@
 <?php
-
+error_log('PHP_RUNTIME_VERSION=' . PHP_VERSION);
 // 1. Crear el ecosistema de carpetas en la memoria RAM de Vercel
 $tmp = '/tmp/laravel';
 $directorios = [
